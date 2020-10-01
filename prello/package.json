@@ -1,0 +1,21 @@
+{
+  "name": "prello",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@auth0/auth0-react": "^1.1.0",
+    "next": "9.5.3",
+    "next-redux-wrapper": "^6.0.2",
+    "react": "16.13.1",
+    "react-dnd": "^11.1.3",
+    "react-dnd-html5-backend": "^11.1.3",
+    "react-dom": "16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5"
+  }
+}

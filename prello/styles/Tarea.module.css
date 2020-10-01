@@ -1,0 +1,49 @@
+.container {
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  border: solid 0.5px grey;
+  min-width: 150px;
+  max-width: 250px;
+  margin: 10px;
+  padding: 5px;
+  -webkit-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+  box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+}
+
+.innerContainer {
+  margin: 0px;
+  padding: 0px;
+}
+
+.seccion {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding-left: 10px;
+  padding-top: 2px;
+  justify-content: space-between;
+}
+
+.descripcion {
+  margin: auto;
+  padding: 10px;
+  padding-top: 0px;
+  word-wrap: break-word;
+}
+
+.roles {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.rol {
+  background-color: red;
+  font-size: 12px;
+  color: black;
+  border-radius: 10px;
+  padding: 3px;
+  margin: 3px;
+}

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  border-radius: 10px;
+  height: calc(75%);
+  overflow-x: auto;
+}
+
+.titulo {
+  display: flex;
+  padding: 0px;
+  margin: -15px 10px -15px 10px;
+  justify-content: space-between;
+}
