@@ -19,6 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
           domain="dev-jx8fysvq.us.auth0.com"
           clientId="d0b0YU95Fq69C0QMovzgxjfv2oY5aXmT"
           redirectUri="http://localhost:3000/perfil"
+          audience="https://api-prello/v1"
         >
           <Layout initialProps={{ ...pageProps }}>
             <Wrap Component={Component}></Wrap>
