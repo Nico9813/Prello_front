@@ -7,7 +7,6 @@ import { ListasEstados } from "../components/ListasEstados";
 import { useSelector } from "react-redux";
 import { Layout } from "../components/layout/Layout";
 import { WithFetchData } from "../components/wrap/WithFetchData";
-import { useState } from "react";
 
 function Tablero() {
   const router = useRouter();
