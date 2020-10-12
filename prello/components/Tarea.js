@@ -1,37 +1,55 @@
-import { DndProvider, useDrag } from "react-dnd";
-import { useDispatch } from "react-redux";
-import { crear_cambiar_estado_tarea } from "../data/acciones";
+import { useDrag } from "react-dnd";
 import styles from "../styles/Tarea.module.css";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import TareaModal from "./TareaModal";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { crear_actualizar_tarea } from "../data/acciones";
 
 export default function Tarea(props) {
   const { Tarea } = props;
+  const dispatch = useDispatch()
+  const roles = [];
+  const [isOpen, setIsOpen] = useState(false);
+
   const MAX_LONG = 50;
-  const roles = ["QA", "DEVELOP", "TESTING"];
   const { descripcion } = Tarea;
   const descripcion_acotada =
     descripcion.length < MAX_LONG
       ? descripcion
       : descripcion.slice(0, MAX_LONG) + "...";
 
-  const [collectedProps, drag] = useDrag({
+  const [_, drag] = useDrag({
     item: { id: Tarea.id, type: "tarea" },
   });
 
+  const toggleModal = () => setIsOpen((prevState) => !prevState);
+
+  const updateTarea = (tareaFinal) => {
+    dispatch(crear_actualizar_tarea(Tarea.id, tareaFinal))
+    toggleModal()
+  }
+
   return (
-    <div ref={drag} className={styles.container}>
-      <div className={styles.seccion}>
-        <b>{Tarea.titulo}</b>
+    <>
+      <div
+        ref={drag}
+        onClick={() => toggleModal()}
+        className={styles.container}
+      >
+        <div className={styles.seccion}>
+          <b>{Tarea.titulo}</b>
+        </div>
+        <hr></hr>
+        <div className={styles.descripcion}>
+          <p>{descripcion_acotada}</p>
+        </div>
+        <div className={styles.roles}>
+          {roles.map((rol) => (
+            <p className={styles.rol}>{rol}</p>
+          ))}
+        </div>
       </div>
-      <hr></hr>
-      <div className={styles.descripcion}>
-        <p>{descripcion_acotada}</p>
-      </div>
-      <div className={styles.roles}>
-        {roles.map((rol) => (
-          <p className={styles.rol}>{rol}</p>
-        ))}
-      </div>
-    </div>
+      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea}/>
+    </>
   );
 }

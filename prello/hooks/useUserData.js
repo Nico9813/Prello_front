@@ -19,7 +19,7 @@ export async function useUserData() {
         audience: `https://api-prello/v1`,
       });
 
-      const metadataResponse = await fetch(`http://127.0.0.1:56193/perfil`, {
+      const metadataResponse = await fetch(`http://127.0.0.1:60709/perfil`, {
         headers: {
           contentType: "application/json",
           method: "GET",

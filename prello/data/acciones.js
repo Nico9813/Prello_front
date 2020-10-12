@@ -1,10 +1,10 @@
 export const SET_FETCH_DATA = "SET_FETCH_DATA";
 export const AGREGAR_TABLEROS = "AGREGAR_TABLEROS";
 export const CAMBIAR_NOMBRE = "CAMBIAR_NOMBRE";
-export const CAMBIAR_DESCRIPCION_TAREA = "CAMBIAR_DESCRIPCION_TAREA";
 export const CAMBIAR_ESTADO_TAREA = "CAMBIAR_ESTADO_TAREA";
 export const AGREGAR_TAREAS = "AGREGAR_TAREAS";
 export const AGREGAR_ROL = "AGREGAR_ROL";
+export const ACTUALIZAR_TAREA = "ACTUALIZAR_TAREA";
 
 export const crear_set_fet_data = (estado) => {
   return {
@@ -23,6 +23,16 @@ export const crear_cambiar_nombre = (nombre) => {
     },
   };
 };
+
+export const crear_actualizar_tarea = (tarea_id, actualizaciones) => {
+  return {
+    type: ACTUALIZAR_TAREA,
+    payload: {
+      tarea_id,
+      actualizaciones
+    }
+  }
+}
 
 export const crear_cambiar_estado_tarea = (tarea_id, estado_nuevo) => {
   return {

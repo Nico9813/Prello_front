@@ -34,6 +34,7 @@ function Tablero() {
             <ListasEstados
               Tareas={tablero_actual.tareas}
               Estados={tablero_actual.estados}
+              TableroId={tablero_actual.id}
             />
           </div>
         </div>

@@ -15,7 +15,6 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.texto}>Landing</h1>
-
         <button onClick={() => loginWithRedirect()}>Log in</button>
       </main>
     </div>

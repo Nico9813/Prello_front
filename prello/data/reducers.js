@@ -3,8 +3,8 @@ import * as Acciones from "./acciones";
 
 const tarea_reducer = (tarea = { id: -1 }, accion) => {
   switch (accion.type) {
-    case Acciones.CAMBIAR_DESCRIPCION_TAREA:
-      tarea.descripcion = accion.payload.nueva_descripcion;
+    case Acciones.ACTUALIZAR_TAREA: 
+      tarea = (tarea.id == accion.payload.tarea_id) ? {...tarea, ...accion.payload.actualizaciones} : tarea
       break;
     case Acciones.CAMBIAR_ESTADO_TAREA:
       tarea.estado =
@@ -22,7 +22,7 @@ const tarea_reducer = (tarea = { id: -1 }, accion) => {
 const tablero_reducer = (tablero = { tareas: [] }, accion) => {
   switch (accion.type) {
     case Acciones.AGREGAR_TAREAS:
-      tablero.tareas = [...tareas, accion.payload.tareas_nuevas];
+      tablero.tareas = [...tablero.tareas, ...accion.payload.tareas_nuevas];
   }
 
   return {
