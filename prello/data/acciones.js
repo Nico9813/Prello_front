@@ -2,7 +2,8 @@ export const SET_FETCH_DATA = "SET_FETCH_DATA";
 export const AGREGAR_TABLEROS = "AGREGAR_TABLEROS";
 export const CAMBIAR_NOMBRE = "CAMBIAR_NOMBRE";
 export const CAMBIAR_ESTADO_TAREA = "CAMBIAR_ESTADO_TAREA";
-export const AGREGAR_TAREAS = "AGREGAR_TAREAS";
+export const AGREGAR_TAREA = "AGREGAR_TAREA";
+export const ELIMINTAR_TAREA = "ELIMINTAR_TAREA";
 export const AGREGAR_ROL = "AGREGAR_ROL";
 export const ACTUALIZAR_TAREA = "ACTUALIZAR_TAREA";
 
@@ -53,12 +54,22 @@ export const crear_agregar_tableros = (tableros) => {
   };
 };
 
-export const crear_agregar_tareas = (id_tablero, tareas) => {
+export const crear_agregar_tarea = (id_tablero, tarea) => {
   return {
-    type: AGREGAR_TAREAS,
+    type: AGREGAR_TAREA,
     payload: {
       id_tablero: id_tablero,
-      tareas_nuevas: tareas,
+      tarea_nueva: tarea,
+    },
+  };
+};
+
+export const crear_eliminar_tarea = (id_tablero, id_tarea) => {
+  return {
+    type: ELIMINTAR_TAREA,
+    payload: {
+      id_tablero: id_tablero,
+      id_tarea_eliminada: id_tarea,
     },
   };
 };

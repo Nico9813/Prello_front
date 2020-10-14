@@ -5,7 +5,7 @@
   border: solid 0.5px grey;
   min-width: 150px;
   max-width: 250px;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
   cursor: pointer;
   -webkit-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
@@ -20,11 +20,11 @@
 
 .seccion {
   display: flex;
-  flex-wrap: wrap;
   margin: auto;
+  overflow: clip;
   padding-left: 10px;
   padding-top: 2px;
-  justify-content: space-between;
+  word-wrap: break-word;
 }
 
 .descripcion {

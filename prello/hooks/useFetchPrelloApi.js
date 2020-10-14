@@ -1,24 +1,40 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react"
 
-export async function useFetchPrelloApi() {
-    const { getAccessTokenSilently } = useAuth0();
-    try {
-      const accessToken = await getAccessTokenSilently({
-        audience: `https://api-prello/v1`,
-      });
-      return async function(path, headers, body){
-        const response = await fetch(
-          path, 
-          {
-            headers: {
-              ...headers, 
-              Authorization: `Bearer ${accessToken}`
+var prevAccessToken
+
+export function useFetchPrelloApi(){
+
+    const prelloAudience = `https://api-prello/v1`
+
+    const { getAccessTokenSilently } = useAuth0()
+
+    return async function fetchPrelloApi(path, method, body={}){
+
+        const accessToken = prevAccessToken ?? await getAccessTokenSilently({
+            audience: prelloAudience
+        })
+        
+        prevAccessToken = accessToken
+        
+        const prelloBody = method != 'GET' ? { body: JSON.stringify(body)} : {}
+        const prelloPath = `http://127.0.0.1:52308/${path}`
+
+        try{
+            const options = {
+                method: method, 
+                headers:{
+                    'Content-Type': "application/json",
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                ...prelloBody
             }
-          }
-        )
-        return await response.json()
-      }
-    } catch (e) {
-      console.log(e.message);
+
+            const data = await fetch(prelloPath, options)
+            return await data.json()
+        }catch(e){
+            console.log(e.message)
+        }
     }
+
+    
 }

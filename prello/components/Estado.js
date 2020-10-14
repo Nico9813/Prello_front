@@ -1,14 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { crear_agregar_tareas, crear_cambiar_estado_tarea } from "../data/acciones";
+import { crear_agregar_tarea, crear_cambiar_estado_tarea } from "../data/acciones";
 import styles from "../styles/Estado.module.css";
 import Tarea from "./Tarea";
 import TareaModal from "./TareaModal";
+import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 
 export default function Estado(props) {
   const { Estado, Tareas, TableroId } = props;
+  const fetchPrelloApi = useFetchPrelloApi()
 
   const dispatch = useDispatch();
   const [_, drop] = useDrop({
@@ -20,10 +21,11 @@ export default function Estado(props) {
 
   const [modalNuevaTareaOpen, setIsOpen] = useState(false)
 
-  const agregarTarea = (nuevaTarea) => {
+  const agregarTarea = async function(nuevaTarea){
     setIsOpen(false)
-    nuevaTarea = {...nuevaTarea, estado: Estado, id: 101, tablero_id: TableroId}
-    dispatch(crear_agregar_tareas(TableroId, [nuevaTarea]))
+    const nueva_tarea = { ...nuevaTarea, estado_id: Estado.id, tablero_id: TableroId}
+    const tarea_agregada = await fetchPrelloApi(`tableros/${TableroId}/tareas`, 'POST', nueva_tarea)
+    dispatch(crear_agregar_tarea(TableroId, tarea_agregada))
   }
 
   return (

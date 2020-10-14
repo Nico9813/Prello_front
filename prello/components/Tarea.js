@@ -1,4 +1,4 @@
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import styles from "../styles/Tarea.module.css";
 import TareaModal from "./TareaModal";
 import { useState } from "react";
@@ -18,9 +18,16 @@ export default function Tarea(props) {
       ? descripcion
       : descripcion.slice(0, MAX_LONG) + "...";
 
-  const [_, drag] = useDrag({
+  const [collectedDrag, drag] = useDrag({
     item: { id: Tarea.id, type: "tarea" },
   });
+
+  const [collectedDrop, drop] = useDrop({
+    accept: "tarea",
+    drop: (item) => {
+
+    }
+  })
 
   const toggleModal = () => setIsOpen((prevState) => !prevState);
 
@@ -31,6 +38,7 @@ export default function Tarea(props) {
 
   return (
     <>
+    <div ref={drop}>
       <div
         ref={drag}
         onClick={() => toggleModal()}
@@ -49,7 +57,8 @@ export default function Tarea(props) {
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea}/>
+      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea} onForceClose={() => setIsOpen(false)}/>
+    </div>
     </>
   );
 }

@@ -1,12 +1,25 @@
 import styles from "../styles/TareaModal.module.css";
 import ReactModal from "react-modal";
+import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { crear_eliminar_tarea } from "../data/acciones";
 
-export default function TareaModal({isOpen, tareaInicial, onClose}) {
+export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose={}}) {
 
   const [tarea, setTarea] = useState(tareaInicial)
 
+  const fetchPrelloApi = useFetchPrelloApi()
+  const dispatch = useDispatch()
+
   const {titulo, descripcion} = tarea ?? {titulo: '',descripcion:''}
+
+  const deleteTarea = () => {
+    const {id, tablero_id} = tareaInicial
+    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
+    dispatch(crear_eliminar_tarea(tablero_id, id))
+    onForceClose()
+  }
 
   return (
       <ReactModal
@@ -54,14 +67,11 @@ export default function TareaModal({isOpen, tareaInicial, onClose}) {
           </div>
           <div className={styles.rightContainer}>
             <div>
-              <div className={styles.button}>Prueba</div>
-              <div className={styles.button}>Prueba</div>
-              <div className={styles.button}>Prueba</div>
+              <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> deleteTarea()}><b>Eliminar tarea</b></div>
             </div>
             <div>
-              <div className={styles.button}>Prueba</div>
-              <div className={styles.button}>Prueba</div>
-              <div className={styles.button}>Prueba</div>
+              <div className={styles.button}><b>Prueba</b></div>
+              <div className={styles.button}><b>Prueba</b></div>
             </div>
           </div>
         </div>

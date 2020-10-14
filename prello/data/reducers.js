@@ -21,8 +21,12 @@ const tarea_reducer = (tarea = { id: -1 }, accion) => {
 
 const tablero_reducer = (tablero = { tareas: [] }, accion) => {
   switch (accion.type) {
-    case Acciones.AGREGAR_TAREAS:
-      tablero.tareas = [...tablero.tareas, ...accion.payload.tareas_nuevas];
+    case Acciones.AGREGAR_TAREA:
+      tablero.tareas = [...tablero.tareas, accion.payload.tarea_nueva];
+      break;
+    case Acciones.ELIMINTAR_TAREA:
+      tablero.tareas = [...tablero.tareas.filter( tarea => tarea.id != accion.payload.id_tarea_eliminada)]
+      break;
   }
 
   return {
