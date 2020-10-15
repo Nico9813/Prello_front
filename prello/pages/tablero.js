@@ -16,8 +16,6 @@ function Tablero() {
     state.perfil.tableros.find((tablero) => tablero.id == tablero_id)
   );
 
-  const agregarTablero = () => {};
-
   return (
     <>
       <Head>
@@ -30,7 +28,9 @@ function Tablero() {
         <div className={styles.container}>
           <div className={styles.innerContainer}>
             <h1>{tablero_actual.nombre}</h1>
-            <Workflow />
+            <Workflow 
+              Workflow={tablero_actual.workflow}
+            />
             <ListasEstados
               Tareas={tablero_actual.tareas}
               Estados={tablero_actual.estados}

@@ -1,65 +1,46 @@
 import styles from "../styles/TareaModal.module.css";
 import ReactModal from "react-modal";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { crear_eliminar_tarea } from "../data/acciones";
+import Modal from './Modal'
 
-export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose={}}) {
-
-  const [tarea, setTarea] = useState(tareaInicial)
-
+export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose=()=>{}}) {
   const fetchPrelloApi = useFetchPrelloApi()
   const dispatch = useDispatch()
+
+  const [tarea, setTarea] = useState(tareaInicial)
+  const [isLoading, setIsLoading] = useState(true)
+  const [estadosPosibles, setEstadosPosibles] = useState([])
+
+  useEffect(() => {
+    if(tareaInicial){
+      async function fetchPosiblesEstados(){
+        const {tablero_id, estado} = tareaInicial
+        const path = `/tableros/${tablero_id}/estados/${estado.id}/posibles`
+        const posibles = await fetchPrelloApi(path, 'GET')
+        setIsLoading(false)
+        setEstadosPosibles(posibles)
+      }
+      fetchPosiblesEstados()
+    }
+  }, [])
+
 
   const {titulo, descripcion} = tarea ?? {titulo: '',descripcion:''}
 
   const deleteTarea = () => {
-    const {id, tablero_id} = tareaInicial
-    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
-    dispatch(crear_eliminar_tarea(tablero_id, id))
-    onForceClose()
+    if(tareaInicial){
+      const {id, tablero_id} = tareaInicial
+      fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
+      dispatch(crear_eliminar_tarea(tablero_id, id))
+      onForceClose()
+    }
   }
 
   return (
-      <ReactModal
-        shouldCloseOnEsc={true}
-        onRequestClose={() => {
-          onClose(tarea);
-        }}
-        shouldCloseOnOverlayClick={true}
-        ariaHideApp={false}
-        style={{
-          overlay: {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.50)",
-            backdropFilter: "blur(1px)",
-          },
-          content: {
-            position: "absolute",
-            top: "40px",
-            left: "40px",
-            right: "40px",
-            bottom: "40px",
-            border: "1px solid #ccc",
-            background: "#fff",
-            overflow: "auto",
-            width: "50%",
-            height: "50%",
-            margin: "auto",
-            backgroundColor: "black",
-            WebkitOverflowScrolling: "touch",
-            borderRadius: "4px",
-            outline: "none",
-            padding: "20px",
-          },
-        }}
-        isOpen={isOpen}
-      >
+      <Modal isOpen={isOpen} onClose={() => onClose(tarea)}>
         <div className={styles.modalInnerContainer}>
           <div className={styles.leftContainer}>
             <input className={styles.titulo} value={titulo} onChange={ event => setTarea({...tarea, titulo: event.target.value})}/>
@@ -69,12 +50,14 @@ export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose=
             <div>
               <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> deleteTarea()}><b>Eliminar tarea</b></div>
             </div>
+            {!isLoading &&             
             <div>
-              <div className={styles.button}><b>Prueba</b></div>
-              <div className={styles.button}><b>Prueba</b></div>
-            </div>
+              {estadosPosibles.map((estado, index) => 
+                <div key={index} className={styles.button}><b>{estado.nombre}</b></div>
+              )}
+            </div>}
           </div>
         </div>
-      </ReactModal>
+      </Modal>
   );
 }

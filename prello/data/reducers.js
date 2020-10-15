@@ -27,11 +27,17 @@ const tablero_reducer = (tablero = { tareas: [] }, accion) => {
     case Acciones.ELIMINTAR_TAREA:
       tablero.tareas = [...tablero.tareas.filter( tarea => tarea.id != accion.payload.id_tarea_eliminada)]
       break;
+    case Acciones.AGREGAR_ESTADO:
+      tablero.estados = [...tablero.estados, accion.payload.estado_nuevo]
+      break;
+    case Acciones.ELIMINAR_ESTADO:
+      tablero.tareas = [...tablero.tareas.filter( estado => estado.id != accion.payload.id_estado_eliminado)]
+      break;
   }
 
   return {
     ...tablero,
-    tareas: [...tablero.tareas.map((tarea) => tarea_reducer(tarea, accion))],
+    tareas: [...tablero.tareas.map((tarea) => tarea_reducer(tarea, accion))]
   };
 };
 

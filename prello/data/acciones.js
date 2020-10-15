@@ -6,6 +6,8 @@ export const AGREGAR_TAREA = "AGREGAR_TAREA";
 export const ELIMINTAR_TAREA = "ELIMINTAR_TAREA";
 export const AGREGAR_ROL = "AGREGAR_ROL";
 export const ACTUALIZAR_TAREA = "ACTUALIZAR_TAREA";
+export const AGREGAR_ESTADO = "AGREGAR_ESTADO";
+export const ELIMINAR_ESTADO = "ELIMINAR_ESTADO";
 
 export const crear_set_fet_data = (estado) => {
   return {
@@ -79,6 +81,24 @@ export const crear_agregar_roles = (roles) => {
     type: AGREGAR_ROL,
     payload: {
       roles_nuevos: roles,
+    },
+  };
+};
+
+export const crear_agregar_estado = (estado) => {
+  return {
+    type: AGREGAR_ESTADO,
+    payload: {
+      estado_nuevo: estado,
+    },
+  };
+};
+
+export const crear_eliminar_estado = (estado_id) => {
+  return {
+    type: ELIMINAR_ESTADO,
+    payload: {
+      id_estado_eliminado: estado,
     },
   };
 };
