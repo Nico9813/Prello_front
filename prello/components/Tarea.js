@@ -3,11 +3,13 @@ import styles from "../styles/Tarea.module.css";
 import TareaModal from "./TareaModal";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { crear_actualizar_tarea } from "../data/acciones";
+import { crear_actualizar_tarea, crear_eliminar_tarea } from "../data/acciones";
+import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 
 export default function Tarea(props) {
   const { Tarea } = props;
   const dispatch = useDispatch()
+  const fetchPrelloApi = useFetchPrelloApi()
   const roles = [];
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +38,13 @@ export default function Tarea(props) {
     toggleModal()
   }
 
+  const deleteTarea = () => {
+    const {id, tablero_id} = Tarea
+    dispatch(crear_eliminar_tarea(tablero_id, id))
+    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
+    toggleModal()
+  }
+
   return (
     <>
     <div ref={drop}>
@@ -57,7 +66,7 @@ export default function Tarea(props) {
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea} onForceClose={() => setIsOpen(false)}/>
+      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
     </div>
     </>
   );

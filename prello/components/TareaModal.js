@@ -1,43 +1,11 @@
 import styles from "../styles/TareaModal.module.css";
-import ReactModal from "react-modal";
-import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { crear_eliminar_tarea } from "../data/acciones";
+import { useState } from "react";
 import Modal from './Modal'
 
-export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose=()=>{}}) {
-  const fetchPrelloApi = useFetchPrelloApi()
-  const dispatch = useDispatch()
-
+export default function TareaModal({isOpen, tareaInicial, onClose, onDelete}) {
   const [tarea, setTarea] = useState(tareaInicial)
-  const [isLoading, setIsLoading] = useState(true)
-  const [estadosPosibles, setEstadosPosibles] = useState([])
-
-  useEffect(() => {
-    if(tareaInicial){
-      async function fetchPosiblesEstados(){
-        const {tablero_id, estado} = tareaInicial
-        const path = `/tableros/${tablero_id}/estados/${estado.id}/posibles`
-        const posibles = await fetchPrelloApi(path, 'GET')
-        setIsLoading(false)
-        setEstadosPosibles(posibles)
-      }
-      fetchPosiblesEstados()
-    }
-  }, [])
-
 
   const {titulo, descripcion} = tarea ?? {titulo: '',descripcion:''}
-
-  const deleteTarea = () => {
-    if(tareaInicial){
-      const {id, tablero_id} = tareaInicial
-      fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
-      dispatch(crear_eliminar_tarea(tablero_id, id))
-      onForceClose()
-    }
-  }
 
   return (
       <Modal isOpen={isOpen} onClose={() => onClose(tarea)}>
@@ -48,12 +16,12 @@ export default function TareaModal({isOpen, tareaInicial, onClose, onForceClose=
           </div>
           <div className={styles.rightContainer}>
             <div>
-              <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> deleteTarea()}><b>Eliminar tarea</b></div>
+              {tareaInicial && <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> onDelete()}><b>Eliminar tarea</b></div>}
             </div>
-            {!isLoading &&             
+            {tareaInicial &&             
             <div>
-              {estadosPosibles.map((estado, index) => 
-                <div key={index} className={styles.button}><b>{estado.nombre}</b></div>
+              {tarea.estados_posibles.map((estado, index) => 
+                <div key={index} className={styles.button} onClick={()=> setTarea({...tarea, estado})}><b>{estado.nombre}</b></div>
               )}
             </div>}
           </div>

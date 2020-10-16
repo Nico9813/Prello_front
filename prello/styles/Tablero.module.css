@@ -10,3 +10,9 @@
   flex-direction: column;
   height: 100%;
 }
+
+.titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
