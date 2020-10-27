@@ -17,7 +17,7 @@ export function useFetchPrelloApi(){
         prevAccessToken = accessToken
         
         const prelloBody = method != 'GET' ? { body: JSON.stringify(body)} : {}
-        const prelloPath = `http://127.0.0.1:61605/${path}`
+        const prelloPath = `http://127.0.0.1:52840/${path}`
 
         try{
             const options = {
@@ -29,12 +29,13 @@ export function useFetchPrelloApi(){
                 ...prelloBody
             }
 
+            const inicio = new Date().valueOf()
             const data = await fetch(prelloPath, options)
+            const fin = new Date().valueOf()
+            console.log(`fetch prello api: ${fin - inicio}ms`)
             return await data.json()
         }catch(e){
             console.log(e.message)
         }
     }
-
-    
 }

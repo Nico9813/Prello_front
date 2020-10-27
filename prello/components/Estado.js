@@ -6,10 +6,12 @@ import styles from "../styles/Estado.module.css";
 import Tarea from "./Tarea";
 import TareaModal from "./TareaModal";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
+import { useRef } from "react";
 
 export default function Estado(props) {
   const { Estado, Tareas, TableroId } = props;
   const fetchPrelloApi = useFetchPrelloApi()
+  const dummy = useRef()
 
   const dispatch = useDispatch();
   const [_, drop] = useDrop({
@@ -23,6 +25,7 @@ export default function Estado(props) {
 
   const agregarTarea = async function(nuevaTarea){
     setIsOpen(false)
+    dummy.current.scrollIntoView({behavior: 'smooth'})
     const nueva_tarea = { ...nuevaTarea, estado_id: Estado.id, tablero_id: TableroId}
     const tarea_agregada = await fetchPrelloApi(`tableros/${TableroId}/tareas`, 'POST', nueva_tarea)
     dispatch(crear_agregar_tarea(TableroId, tarea_agregada))
@@ -31,7 +34,7 @@ export default function Estado(props) {
   return (
     <div ref={drop} className={styles.container}>
       <div className={styles.innerContainer}>
-        <div className={styles.titulo}>
+              <div className={styles.titulo}>
           <p>{Estado.nombre}</p>
           <p onClick={()=>setIsOpen(true)}>Add</p>
           {<TareaModal isOpen={modalNuevaTareaOpen} onClose={agregarTarea}/>}
@@ -40,6 +43,7 @@ export default function Estado(props) {
           <Tarea key={index} Tarea={tarea}/>
         ))}
       </div>
+      <div ref={dummy}/>
     </div>
   );
 }

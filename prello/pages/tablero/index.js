@@ -14,7 +14,7 @@ function Tablero() {
   const router = useRouter();
   const { tablero_id } = router.query;
 
-  const TABS = ['TAREAS', 'TRANSICIONES']
+  const TABS = ['TAREAS', 'TRANSICIONES', 'HISTORIAL']
 
   const [indiceActual, setIndiceActual] = useState(0)
 
@@ -33,7 +33,12 @@ function Tablero() {
       case 'TRANSICIONES':
         return(<ListaTransiciones 
               TransicionesPosibles={tablero_actual.workflow.transiciones_posibles}
+              Tablero={tablero_actual}
             />)
+      case 'HISTORIAL':
+        return(
+          <p>HISTORIAL</p>
+        )
     }
   }
 
@@ -50,7 +55,13 @@ function Tablero() {
           <div className={styles.innerContainer}>
             <div className={styles.titulo}> 
               <h1>{tablero_actual.nombre}</h1>
-              <b onClick={(() => setIndiceActual(prevState => (prevState + 1) % TABS.length))}>{TABS[indiceActual]}</b>
+              <div>
+                {TABS.map( (tab, index) => 
+                  <b key={index} onClick={(() => setIndiceActual(TABS.indexOf(tab)))} style={{color: TABS[indiceActual] != tab ? 'grey' : 'white'}}>
+                    {tab}{index != (TABS.length - 1)  && '/ '}
+                  </b>
+                )}
+              </div>
             </div>
             <Workflow 
               Workflow={tablero_actual.workflow}

@@ -19,8 +19,10 @@ const tarea_reducer = (tarea = { id: -1 }, accion) => {
   };
 };
 
-const tablero_reducer = (tablero = { tareas: [] }, accion) => {
-  switch (accion.type) {
+const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
+
+  if(tablero.id == accion.payload.id_tablero){
+    switch (accion.type) {
     case Acciones.AGREGAR_TAREA:
       tablero.tareas = [...tablero.tareas, accion.payload.tarea_nueva];
       break;
@@ -33,6 +35,22 @@ const tablero_reducer = (tablero = { tareas: [] }, accion) => {
     case Acciones.ELIMINAR_ESTADO:
       tablero.tareas = [...tablero.tareas.filter( estado => estado.id != accion.payload.id_estado_eliminado)]
       break;
+    case Acciones.AGREGAR_TRANSICION_POSIBLE:
+      const {transicion_nueva: {estado_inicial, estado_final, acciones}, transicion_nueva} = accion.payload
+
+      let transaccion_actual = tablero.workflow.transiciones_posibles.find(tr => tr.estado_inicial.id == estado_inicial.id && tr.estado_final.id == estado_final.id)
+
+      if(transaccion_actual){
+        transaccion_actual.acciones.concat(acciones)
+      }else{
+        tablero.workflow.transiciones_posibles = [...tablero.workflow.transiciones_posibles, transicion_nueva]
+      }
+      break;
+    case Acciones.ELIMINAR_TRANSICION_POSIBLE:
+      const { id_transicion_eliminada } = accion.payload
+      tablero.workflow.transiciones_posibles = [...tablero.workflow.transiciones_posibles.filter(tr => tr.id != id_transicion_eliminada)]
+      break;
+  }
   }
 
   return {

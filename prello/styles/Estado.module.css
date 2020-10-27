@@ -1,24 +1,24 @@
 .container {
-  margin: 10px;
-  margin-left: 5px;
-  padding: 10px;
-  min-width: 200px;
-  background-color: #666666;
-  height: calc(100% - 10px * 2);
-  border-radius: 5px;
-  overflow-y: auto;
+	margin: 10px;
+	margin-left: 5px;
+	padding: 10px;
+	min-width: 200px;
+	background-color: #666666;
+	overflow-y: auto;
+	height: calc(100% - 10px * 2);
+	border-radius: 5px;
 }
 
 .innerContainer {
-  margin: auto;
+	margin: auto;
 }
 
 .titulo {
-  background-color: grey;
-  border-radius: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+	background-color: grey;
+	border-radius: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
 }

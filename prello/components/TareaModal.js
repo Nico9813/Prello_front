@@ -2,10 +2,12 @@ import styles from "../styles/TareaModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
 
-export default function TareaModal({isOpen, tareaInicial, onClose, onDelete}) {
+export default function TareaModal({isOpen, tareaInicial = {}, onClose, onDelete}) {
   const [tarea, setTarea] = useState(tareaInicial)
 
-  const {titulo, descripcion} = tarea ?? {titulo: '',descripcion:''}
+  const titulo = tarea.titulo ?? ''
+  const descripcion = tarea.descripcion ?? ''
+  const estados_posibles = tarea.estados_posibles ?? []
 
   return (
       <Modal isOpen={isOpen} onClose={() => onClose(tarea)}>
@@ -16,13 +18,17 @@ export default function TareaModal({isOpen, tareaInicial, onClose, onDelete}) {
           </div>
           <div className={styles.rightContainer}>
             <div>
-              {tareaInicial && <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> onDelete()}><b>Eliminar tarea</b></div>}
+              {tareaInicial && 
+                <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> onDelete()}>
+                  <b>Eliminar tarea</b>
+                </div>
+              }
             </div>
             {tareaInicial &&             
-            <div>
-              {tarea.estados_posibles.map((estado, index) => 
-                <div key={index} className={styles.button} onClick={()=> setTarea({...tarea, estado})}><b>{estado.nombre}</b></div>
-              )}
+              <div>
+                {estados_posibles.map((estado, index) => 
+                  <div key={index} className={styles.button} onClick={()=> setTarea({...tarea, estado})}><b>{estado.nombre}</b></div>
+                )}
             </div>}
           </div>
         </div>

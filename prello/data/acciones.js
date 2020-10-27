@@ -8,6 +8,8 @@ export const AGREGAR_ROL = "AGREGAR_ROL";
 export const ACTUALIZAR_TAREA = "ACTUALIZAR_TAREA";
 export const AGREGAR_ESTADO = "AGREGAR_ESTADO";
 export const ELIMINAR_ESTADO = "ELIMINAR_ESTADO";
+export const AGREGAR_TRANSICION_POSIBLE = "AGREGAR_TRANSICION_POSIBLE";
+export const ELIMINAR_TRANSICION_POSIBLE = "ELIMINAR_TRANSICION_POSIBLE";
 
 export const crear_set_fet_data = (estado) => {
   return {
@@ -98,7 +100,27 @@ export const crear_eliminar_estado = (estado_id) => {
   return {
     type: ELIMINAR_ESTADO,
     payload: {
-      id_estado_eliminado: estado,
+      id_estado_eliminado: estado_id,
     },
   };
 };
+
+export const crear_agregar_transicion_posible = (tablero_id, transicion) => {
+    return {
+    type: AGREGAR_TRANSICION_POSIBLE,
+    payload: {
+      id_tablero: tablero_id,
+      transicion_nueva: transicion
+    },
+  };
+}
+
+export const crear_eliminar_transicion_posible = (tablero_id, transicion_id) => {
+    return {
+    type: ELIMINAR_TRANSICION_POSIBLE,
+    payload: {
+      id_tablero: tablero_id,
+      id_transicion_eliminada: transicion_id,
+    },
+  };
+}
