@@ -10,9 +10,10 @@ import { WithFetchData } from "../../components/wrap/WithFetchData";
 import { useState } from "react";
 import { ListaTransiciones } from "../../components/ListaTransiciones";
 
-function Tablero() {
+function Tablero(props) {
   const router = useRouter();
   const { tablero_id } = router.query;
+  const { dispatchWRT } = props
 
   const TABS = ['TAREAS', 'TRANSICIONES', 'HISTORIAL']
 

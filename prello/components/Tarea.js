@@ -5,10 +5,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { crear_actualizar_tarea, crear_eliminar_tarea } from "../data/acciones";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
+import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export default function Tarea(props) {
   const { Tarea } = props;
-  const dispatch = useDispatch()
+  const dispatch = useRealTimeDispatch()
   const fetchPrelloApi = useFetchPrelloApi()
   const roles = [];
   const [isOpen, setIsOpen] = useState(false);

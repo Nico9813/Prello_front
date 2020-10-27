@@ -11,7 +11,7 @@ const wsServer = new webSocketServer({
 
 const NUEVA_CONEXION = 'NUEVA_CONEXION'
 
-const tableros = {}
+var tableros = {}
 
 const getUniqueID = () => {
     const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -27,11 +27,10 @@ wsServer.on('request', function (request) {
         const { type, payload } = mensaje
         const { tablero_id } = mensaje.payload
 
-        console.log("[Mensaje recibido] - %s ( %s )", type, JSON.stringify(payload))
+        //console.log("[Mensaje recibido] - %s ( %s )", type, JSON.stringify(payload))
         
         if (mensaje.type == NUEVA_CONEXION){
-            if(!tableros[tablero_id]) tableros[tablero_id] = []
-            tableros[tablero_id][userID] = connection
+            tableros[tablero_id] = tableros[tablero_id] ? [...tableros[tablero_id], connection] : [connection]
         }else{
             broadcastMessage(tablero_id, mensaje, connection);
         }
@@ -40,7 +39,7 @@ wsServer.on('request', function (request) {
 
 const broadcastMessage = (tablero_id, mensaje, origen) => {
     const mensaje_json = JSON.stringify(mensaje)
-    Object.keys(tableros[tablero_id]).map((client) => {
-        if(clienteActual != origen) clienteActual.send(mensaje_json);
+    tableros[tablero_id].map((client) => {
+        if(client != origen) client.send(mensaje_json);
     });
 }

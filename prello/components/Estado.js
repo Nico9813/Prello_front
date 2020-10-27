@@ -7,13 +7,14 @@ import Tarea from "./Tarea";
 import TareaModal from "./TareaModal";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 import { useRef } from "react";
+import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export default function Estado(props) {
   const { Estado, Tareas, TableroId } = props;
   const fetchPrelloApi = useFetchPrelloApi()
+  const dispatch = useRealTimeDispatch()
   const dummy = useRef()
 
-  const dispatch = useDispatch();
   const [_, drop] = useDrop({
     accept: "tarea",
     drop: (item, _) => {
