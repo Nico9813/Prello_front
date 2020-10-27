@@ -34,7 +34,7 @@ export default function Tarea(props) {
   const toggleModal = () => setIsOpen((prevState) => !prevState);
 
   const updateTarea = (tareaFinal) => {
-    dispatch(crear_actualizar_tarea(Tarea.id, tareaFinal))
+    dispatch(crear_actualizar_tarea(Tarea.tablero_id, Tarea.id, tareaFinal))
     toggleModal()
   }
 

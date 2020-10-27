@@ -2,15 +2,15 @@ import { combineReducers } from "redux";
 import * as Acciones from "./acciones";
 
 const tarea_reducer = (tarea = { id: -1 }, accion) => {
+
+  if(tarea.id != accion.payload.tarea_id) return {...tarea}
+
   switch (accion.type) {
     case Acciones.ACTUALIZAR_TAREA: 
-      tarea = (tarea.id == accion.payload.tarea_id) ? {...tarea, ...accion.payload.actualizaciones} : tarea
+      tarea = {...tarea, ...accion.payload.actualizaciones}
       break;
     case Acciones.CAMBIAR_ESTADO_TAREA:
-      tarea.estado =
-        tarea.id == accion.payload.tarea_id
-          ? accion.payload.estado_nuevo
-          : tarea.estado;
+      tarea.estado = accion.payload.estado_nuevo
       break;
   }
 
@@ -21,8 +21,9 @@ const tarea_reducer = (tarea = { id: -1 }, accion) => {
 
 const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
 
-  if(tablero.id == accion.payload.id_tablero){
-    switch (accion.type) {
+  if(tablero.id != accion.payload.tablero_id) return {...tablero}
+
+  switch (accion.type) {
     case Acciones.AGREGAR_TAREA:
       tablero.tareas = [...tablero.tareas, accion.payload.tarea_nueva];
       break;
@@ -50,7 +51,6 @@ const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
       const { id_transicion_eliminada } = accion.payload
       tablero.workflow.transiciones_posibles = [...tablero.workflow.transiciones_posibles.filter(tr => tr.id != id_transicion_eliminada)]
       break;
-  }
   }
 
   return {

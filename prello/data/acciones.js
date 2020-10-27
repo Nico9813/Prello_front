@@ -29,51 +29,11 @@ export const crear_cambiar_nombre = (nombre) => {
   };
 };
 
-export const crear_actualizar_tarea = (tarea_id, actualizaciones) => {
-  return {
-    type: ACTUALIZAR_TAREA,
-    payload: {
-      tarea_id,
-      actualizaciones
-    }
-  }
-}
-
-export const crear_cambiar_estado_tarea = (tarea_id, estado_nuevo) => {
-  return {
-    type: CAMBIAR_ESTADO_TAREA,
-    payload: {
-      tarea_id,
-      estado_nuevo,
-    },
-  };
-};
-
 export const crear_agregar_tableros = (tableros) => {
   return {
     type: AGREGAR_TABLEROS,
     payload: {
       tableros_nuevos: tableros,
-    },
-  };
-};
-
-export const crear_agregar_tarea = (id_tablero, tarea) => {
-  return {
-    type: AGREGAR_TAREA,
-    payload: {
-      id_tablero: id_tablero,
-      tarea_nueva: tarea,
-    },
-  };
-};
-
-export const crear_eliminar_tarea = (id_tablero, id_tarea) => {
-  return {
-    type: ELIMINTAR_TAREA,
-    payload: {
-      id_tablero: id_tablero,
-      id_tarea_eliminada: id_tarea,
     },
   };
 };
@@ -87,19 +47,65 @@ export const crear_agregar_roles = (roles) => {
   };
 };
 
-export const crear_agregar_estado = (estado) => {
+//ACTUALIZAR TABLERO
+
+export const crear_agregar_tarea = (tablero_id, tarea) => {
+  return {
+    type: AGREGAR_TAREA,
+    payload: {
+      tablero_id,
+      tarea_nueva: tarea,
+    },
+  };
+};
+
+export const crear_eliminar_tarea = (tablero_id, id_tarea) => {
+  return {
+    type: ELIMINTAR_TAREA,
+    payload: {
+      tablero_id,
+      id_tarea_eliminada: id_tarea,
+    },
+  };
+};
+
+export const crear_actualizar_tarea = (tablero_id, tarea_id, actualizaciones) => {
+  return {
+    type: ACTUALIZAR_TAREA,
+    payload: {
+      tablero_id,
+      tarea_id,
+      actualizaciones
+    }
+  }
+}
+
+export const crear_cambiar_estado_tarea = (tablero_id, tarea_id, estado_nuevo) => {
+  return {
+    type: CAMBIAR_ESTADO_TAREA,
+    payload: {
+      tablero_id,
+      tarea_id,
+      estado_nuevo,
+    },
+  };
+};
+
+export const crear_agregar_estado = (tablero_id, estado) => {
   return {
     type: AGREGAR_ESTADO,
     payload: {
+      tablero_id,
       estado_nuevo: estado,
     },
   };
 };
 
-export const crear_eliminar_estado = (estado_id) => {
+export const crear_eliminar_estado = (tablero_id, estado_id) => {
   return {
     type: ELIMINAR_ESTADO,
     payload: {
+      tablero_id,
       id_estado_eliminado: estado_id,
     },
   };
@@ -109,7 +115,7 @@ export const crear_agregar_transicion_posible = (tablero_id, transicion) => {
     return {
     type: AGREGAR_TRANSICION_POSIBLE,
     payload: {
-      id_tablero: tablero_id,
+      tablero_id,
       transicion_nueva: transicion
     },
   };
@@ -119,7 +125,7 @@ export const crear_eliminar_transicion_posible = (tablero_id, transicion_id) => 
     return {
     type: ELIMINAR_TRANSICION_POSIBLE,
     payload: {
-      id_tablero: tablero_id,
+      tablero_id,
       id_transicion_eliminada: transicion_id,
     },
   };

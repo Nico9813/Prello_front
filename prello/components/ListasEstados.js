@@ -16,7 +16,7 @@ export const ListasEstados = (props) => {
   const agregarEstado = async function(nombre){
     setIsOpen(false)
     const estado = await fetchPrelloApi(`tableros/${TableroId}/estados`,'POST',{nombre: nombre})
-    dispatch(crear_agregar_estado(estado))
+    dispatch(crear_agregar_estado(TableroId, estado))
   }
 
   return (

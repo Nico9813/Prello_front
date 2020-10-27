@@ -17,7 +17,7 @@ export default function Estado(props) {
   const [_, drop] = useDrop({
     accept: "tarea",
     drop: (item, _) => {
-      dispatch(crear_cambiar_estado_tarea(item.id, Estado));
+      dispatch(crear_cambiar_estado_tarea(TableroId, item.id, Estado));
     },
   });
 

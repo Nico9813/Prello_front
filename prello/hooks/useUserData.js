@@ -5,6 +5,7 @@ import {
   crear_set_fet_data,
 } from "../data/acciones";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
+import { useRealTimeSocket } from "../hooks/useRealTimeSocket";
 
 export async function useUserData() {
   const reduxStore = initializeStore();
@@ -18,8 +19,9 @@ export async function useUserData() {
     const { tableros, roles } = await fetchPrelloApi('perfil', 'GET')
     dispatch(crear_agregar_tableros(tableros));
     dispatch(crear_agregar_roles(roles));
+    useRealTimeSocket(dispatch, tableros.map(tablero => tablero.id))
   }
-
+  
   //TODO: Utilizar retorno para fallo de autentificacion y isLoading
 
   return reduxStore.getState();

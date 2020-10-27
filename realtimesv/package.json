@@ -1,0 +1,11 @@
+{
+  "name": "realtimesv",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "websocket": "^1.0.31"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
