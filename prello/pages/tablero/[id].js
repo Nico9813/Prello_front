@@ -12,15 +12,14 @@ import { ListaTransiciones } from "../../components/ListaTransiciones";
 
 function Tablero(props) {
   const router = useRouter();
-  const { tablero_id } = router.query;
-  const { dispatchWRT } = props
+  const { id } = router.query;
 
   const TABS = ['TAREAS', 'TRANSICIONES', 'HISTORIAL']
 
   const [indiceActual, setIndiceActual] = useState(0)
 
   const tablero_actual = useSelector((state) =>
-    state.perfil.tableros.find((tablero) => tablero.id == tablero_id)
+    state.perfil.tableros.find((tablero) => tablero.id == id)
   );
 
   const render_tab_actual = () => {

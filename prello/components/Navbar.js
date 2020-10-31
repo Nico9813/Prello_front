@@ -22,12 +22,7 @@ export const NavBar = () => {
           <div className={styles.sublista}>
             {tableros.map((tablero, index) => (
               <div className={styles.item_lista} key={index}>
-                <Link
-                  href={{
-                    pathname: "/tablero",
-                    query: { tablero_id: tablero.id },
-                  }}
-                >
+                <Link href={`/tablero/${tablero.id}`}>
                   <a className={styles.texto}>{tablero.nombre}</a>
                 </Link>
               </div>
