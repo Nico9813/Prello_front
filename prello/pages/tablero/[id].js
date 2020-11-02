@@ -9,6 +9,7 @@ import { Layout } from "../../components/layout/Layout";
 import { WithFetchData } from "../../components/wrap/WithFetchData";
 import { useState } from "react";
 import { ListaTransiciones } from "../../components/ListaTransiciones";
+import { Share } from "../../components/share";
 
 function Tablero(props) {
   const router = useRouter();
@@ -54,7 +55,10 @@ function Tablero(props) {
         <div className={styles.container}>
           <div className={styles.innerContainer}>
             <div className={styles.titulo}> 
-              <h1>{tablero_actual.nombre}</h1>
+              <div>
+                <h1>{tablero_actual.nombre}</h1>
+                <Share TableroId={tablero_actual.id}/>
+              </div>
               <div>
                 {TABS.map( (tab, index) => 
                   <b key={index} onClick={(() => setIndiceActual(TABS.indexOf(tab)))} style={{color: TABS[indiceActual] != tab ? 'grey' : 'white'}}>
