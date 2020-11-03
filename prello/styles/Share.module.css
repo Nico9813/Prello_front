@@ -1,0 +1,13 @@
+.boton {
+	background-color: rgba(0, 132, 255, 0.781);
+	border-radius: 8px;
+	margin: 5px;
+	border: 0.1px solid white;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+}

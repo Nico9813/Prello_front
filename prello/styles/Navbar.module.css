@@ -1,5 +1,5 @@
 .container {
-	background-color: #666666;
+	background-color: rgba(0, 132, 255, 0.781);
 	display: flex;
 	overflow-y: auto;
 	height: 100%;

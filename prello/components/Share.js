@@ -6,6 +6,7 @@ export const Share = ({TableroId}) => {
 
     const fetchPrelloApi = useFetchPrelloApi()
     const [shareLink, setshareLink] = useState()
+    const [msg, setMsg] = useState('Copy Share link')
 
     useEffect(() => {
         (async () => {
@@ -14,14 +15,16 @@ export const Share = ({TableroId}) => {
         })()
     },[])
 
+    const copyShareLink = () => {
+        navigator.clipboard.writeText(shareLink)
+        setMsg('Copied!')
+        setTimeout(() => setMsg('Copy Share link'), 2000)
+    }
+
     return (
         <div className={styles.container}>
-            { shareLink && 
-                <div>
-                    <label style={{margin:5}}>Share link: </label>
-                    <input disabled={true} value={shareLink}/> 
-                    <button onClick={() => navigator.clipboard.writeText(shareLink)}>Copy</button>
-                </div>
+            {
+                <button disabled={!shareLink} className={styles.boton} onClick={copyShareLink}>{msg}</button>
             }
         </div>
   );

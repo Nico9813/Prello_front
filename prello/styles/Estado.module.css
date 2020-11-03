@@ -2,7 +2,7 @@
 	margin: 10px;
 	margin-left: 5px;
 	padding: 10px;
-	min-width: 200px;
+	min-width: 250px;
 	background-color: #666666;
 	overflow-y: auto;
 	height: calc(100% - 10px * 2);

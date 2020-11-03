@@ -32,10 +32,17 @@ function Tablero(props) {
               TableroId={tablero_actual.id}
             />)
       case 'TRANSICIONES':
-        return(<ListaTransiciones 
+        return(
+          <>
+            <Workflow 
+              Workflow={tablero_actual.workflow}
+            />
+            <ListaTransiciones 
               TransicionesPosibles={tablero_actual.workflow.transiciones_posibles}
               Tablero={tablero_actual}
-            />)
+            />
+          </>
+          )
       case 'HISTORIAL':
         return(
           <p>HISTORIAL</p>
@@ -56,20 +63,17 @@ function Tablero(props) {
           <div className={styles.innerContainer}>
             <div className={styles.titulo}> 
               <div>
-                <h1>{tablero_actual.nombre}</h1>
+                <a className={styles.nombre}>{tablero_actual.nombre}</a>
                 <Share TableroId={tablero_actual.id}/>
               </div>
-              <div>
+              <div>        
                 {TABS.map( (tab, index) => 
                   <b key={index} onClick={(() => setIndiceActual(TABS.indexOf(tab)))} style={{color: TABS[indiceActual] != tab ? 'grey' : 'white'}}>
-                    {tab}{index != (TABS.length - 1)  && '/ '}
+                    {tab}{index != (TABS.length - 1)  && ' | '}
                   </b>
                 )}
               </div>
             </div>
-            <Workflow 
-              Workflow={tablero_actual.workflow}
-            />
             {render_tab_actual()}
           </div>
         </div>

@@ -8,6 +8,7 @@ export default function TareaModal({isOpen, tareaInicial = {}, onClose, onDelete
   const titulo = tarea.titulo ?? ''
   const descripcion = tarea.descripcion ?? ''
   const estados_posibles = tarea.estados_posibles ?? []
+  const roles = tarea.roles ?? []
 
   return (
       <Modal isOpen={isOpen} onClose={() => onClose(tarea)}>
@@ -23,6 +24,13 @@ export default function TareaModal({isOpen, tareaInicial = {}, onClose, onDelete
                   <b>Eliminar tarea</b>
                 </div>
               }
+              <div className={styles.roles}>
+                <p>Roles Asignados</p>
+                {roles.map( (rol, index) => 
+                  <h6 key={index} className={styles.rol}>{rol}</h6>
+                )}
+              </div>
+              
             </div>
             {tareaInicial &&             
               <div>

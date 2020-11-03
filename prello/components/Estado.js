@@ -17,8 +17,10 @@ export default function Estado(props) {
 
   const [_, drop] = useDrop({
     accept: "tarea",
-    drop: (item, _) => {
-      dispatch(crear_cambiar_estado_tarea(TableroId, item.id, Estado));
+    drop: async(tarea, _) => {
+      dispatch(crear_cambiar_estado_tarea(TableroId, tarea.id, Estado));
+      const response = await fetchPrelloApi(`tableros/${TableroId}/tareas/${tarea.id}`, 'POST', { estado_id : Estado.id })
+      console.log(JSON.stringify(response,null,2))
     },
   });
 

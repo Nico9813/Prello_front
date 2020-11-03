@@ -1,50 +1,52 @@
 .container {
-  color: black;
-  background-color: white;
-  border-radius: 8px;
-  border: solid 0.5px grey;
-  min-width: 150px;
-  max-width: 250px;
-  margin: 5px;
-  padding: 5px;
-  cursor: pointer;
-  -webkit-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
-  -moz-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
-  box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+	color: black;
+	background-color: white;
+	border-radius: 8px;
+	border: solid 0.5px grey;
+	min-width: 150px;
+	max-width: 350px;
+	margin: 5px;
+	cursor: pointer;
+	-webkit-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+	-moz-box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
+	box-shadow: 10px 7px 44px -8px rgba(0, 0, 0, 0.51);
 }
 
 .innerContainer {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .seccion {
-  display: flex;
-  margin: auto;
-  overflow: clip;
-  padding-left: 10px;
-  padding-top: 2px;
-  word-wrap: break-word;
+	display: flex;
+	margin: auto;
+	overflow: clip;
+	padding-left: 10px;
+	padding-top: 2px;
+	word-wrap: break-word;
 }
 
 .descripcion {
-  margin: auto;
-  padding: 10px;
-  padding-top: 0px;
-  word-wrap: break-word;
+	margin: auto;
+	padding: 10px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	word-wrap: break-word;
 }
 
 .roles {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-x: visible;
+	display: flex;
+	flex-wrap: wrap;
+	overflow-x: visible;
+	margin: 5px;
 }
 
 .rol {
-  background-color: red;
-  font-size: 12px;
-  color: black;
-  border-radius: 10px;
-  padding: 3px;
-  margin: 3px;
+	margin: 1px;
+	background-color: rgba(0, 132, 255, 0.781);
+	border-radius: 8px;
+	border: 0.1px solid white;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
 }

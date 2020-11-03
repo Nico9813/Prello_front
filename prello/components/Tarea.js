@@ -11,7 +11,7 @@ export default function Tarea(props) {
   const { Tarea } = props;
   const dispatch = useRealTimeDispatch()
   const fetchPrelloApi = useFetchPrelloApi()
-  const roles = [];
+  const roles = ['QA','TEST','DEVELOPMENT'];
   const [isOpen, setIsOpen] = useState(false);
 
   const MAX_LONG = 50;
@@ -35,6 +35,8 @@ export default function Tarea(props) {
   const toggleModal = () => setIsOpen((prevState) => !prevState);
 
   const updateTarea = (tareaFinal) => {
+    const {id, tablero_id} = Tarea
+    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'POST', { titulo: tareaFinal.titulo, descripcion: tareaFinal.descripcion})
     dispatch(crear_actualizar_tarea(Tarea.tablero_id, Tarea.id, tareaFinal))
     toggleModal()
   }
@@ -63,11 +65,11 @@ export default function Tarea(props) {
         </div>
         <div className={styles.roles}>
           {roles.map((rol) => (
-            <p className={styles.rol}>{rol}</p>
+            <h6 className={styles.rol}>{rol}</h6>
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={Tarea} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
+      <TareaModal tareaInicial={{...Tarea, roles: roles}} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
     </div>
     </>
   );
