@@ -7,7 +7,8 @@ import Estado from "./Estado";
 import EstadoModal from "./EstadoModal";
 
 export const ListasEstados = (props) => {
-  const { Tareas, Estados, TableroId } = props;
+  const { Tareas, Estados, Tablero } = props;
+  const { id } = Tablero
   const fetchPrelloApi = useFetchPrelloApi()
   const dispatch = useDispatch()
 
@@ -15,8 +16,8 @@ export const ListasEstados = (props) => {
 
   const agregarEstado = async function(nombre){
     setIsOpen(false)
-    const estado = await fetchPrelloApi(`tableros/${TableroId}/estados`,'POST',{nombre: nombre})
-    dispatch(crear_agregar_estado(TableroId, estado))
+    const estado = await fetchPrelloApi(`tableros/${id}/estados`,'POST',{nombre: nombre})
+    dispatch(crear_agregar_estado(id, estado))
   }
 
   return (
@@ -32,7 +33,7 @@ export const ListasEstados = (props) => {
             key={index}
             Estado={estado}
             Tareas={Tareas.filter((tarea) => tarea.estado.id == estado.id)}
-            TableroId={TableroId}
+            Tablero={Tablero}
           />
         ))}
       </div>

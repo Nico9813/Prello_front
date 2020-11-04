@@ -51,6 +51,10 @@ const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
       const { id_transicion_eliminada } = accion.payload
       tablero.workflow.transiciones_posibles = [...tablero.workflow.transiciones_posibles.filter(tr => tr.id != id_transicion_eliminada)]
       break;
+    case Acciones.AGREGAR_TRANSICION_REALIZADA:
+      const { transicion_realizada_nueva } = accion.payload
+      tablero.transiciones = [...tablero.transiciones, transicion_realizada_nueva]
+      break;
   }
 
   return {

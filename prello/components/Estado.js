@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { crear_agregar_tarea, crear_cambiar_estado_tarea } from "../data/acciones";
+import { crear_agregar_tarea, crear_cambiar_estado_tarea, crear_agregar_transicion_realizada } from "../data/acciones";
 import styles from "../styles/Estado.module.css";
 import Tarea from "./Tarea";
 import TareaModal from "./TareaModal";
@@ -10,7 +10,8 @@ import { useRef } from "react";
 import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export default function Estado(props) {
-  const { Estado, Tareas, TableroId } = props;
+  const { Estado, Tareas, Tablero } = props;
+  const { id : TableroId, roles : Roles } = Tablero
   const fetchPrelloApi = useFetchPrelloApi()
   const dispatch = useRealTimeDispatch()
   const dummy = useRef()
@@ -19,8 +20,8 @@ export default function Estado(props) {
     accept: "tarea",
     drop: async(tarea, _) => {
       dispatch(crear_cambiar_estado_tarea(TableroId, tarea.id, Estado));
-      const response = await fetchPrelloApi(`tableros/${TableroId}/tareas/${tarea.id}`, 'POST', { estado_id : Estado.id })
-      console.log(JSON.stringify(response,null,2))
+      const transicion_realiada = await fetchPrelloApi(`tableros/${TableroId}/transiciones`, 'POST', { id_tarea: tarea.id, id_estado_final : Estado.id })
+      dispatch(crear_agregar_transicion_realizada(TableroId, transicion_realiada));
     },
   });
 
@@ -43,7 +44,7 @@ export default function Estado(props) {
           {<TareaModal isOpen={modalNuevaTareaOpen} onClose={agregarTarea}/>}
         </div>
         {Tareas.map((tarea, index) => (
-          <Tarea key={index} Tarea={tarea}/>
+          <Tarea key={index} Tarea={tarea} Roles={Roles}/>
         ))}
       </div>
       <div ref={dummy}/>

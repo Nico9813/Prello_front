@@ -13,12 +13,12 @@ export async function useUserData() {
 
   if (!isFetched) {
     const { dispatch } = reduxStore;
+    console.log("fetching data...")
     const fetchPrelloApi = useFetchPrelloApi()
     dispatch(crear_set_fet_data(true));
     
-    const { tableros, roles } = await fetchPrelloApi('perfil', 'GET')
+    const { tableros } = await fetchPrelloApi('perfil', 'GET')
     dispatch(crear_agregar_tableros(tableros));
-    dispatch(crear_agregar_roles(roles));
     useRealTimeSocket(dispatch, tableros.map(tablero => tablero.id))
   }
   

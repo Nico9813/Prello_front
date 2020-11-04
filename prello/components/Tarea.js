@@ -2,16 +2,14 @@ import { useDrag, useDrop } from "react-dnd";
 import styles from "../styles/Tarea.module.css";
 import TareaModal from "./TareaModal";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { crear_actualizar_tarea, crear_eliminar_tarea } from "../data/acciones";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export default function Tarea(props) {
-  const { Tarea } = props;
+  const { Tarea, Roles } = props;
   const dispatch = useRealTimeDispatch()
   const fetchPrelloApi = useFetchPrelloApi()
-  const roles = ['QA','TEST','DEVELOPMENT'];
   const [isOpen, setIsOpen] = useState(false);
 
   const MAX_LONG = 50;
@@ -64,12 +62,12 @@ export default function Tarea(props) {
           <p>{descripcion_acotada}</p>
         </div>
         <div className={styles.roles}>
-          {roles.map((rol) => (
-            <h6 className={styles.rol}>{rol}</h6>
+          {Tarea.roles.map((rol) => (
+            <h6 className={styles.rol}>{rol.nombre}</h6>
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={{...Tarea, roles: roles}} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
+      <TareaModal tareaInicial={Tarea} rolesPosibles={Roles} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
     </div>
     </>
   );

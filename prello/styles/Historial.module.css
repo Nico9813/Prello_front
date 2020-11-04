@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	margin: 8px;
+	height: calc(100%);
+	overflow-x: auto;
+	background-color: #666666;
+}
+
+.transicion {
+	display: flex;
+}
+
+.titulo {
+	display: flex;
+	padding: 0px;
+	margin: -15px 10px -15px 10px;
+	justify-content: space-between;
+}
+
+.columna {
+	width: 25%;
+	word-wrap: break-word;
+	border-right: solid black 0.1px;
+}
+
+.contenido {
+	text-align: center;
+	padding: 10px;
+}
+
+.estado {
+	background-color: grey;
+	border-radius: 20px;
+}

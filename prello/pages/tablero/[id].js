@@ -9,6 +9,7 @@ import { Layout } from "../../components/layout/Layout";
 import { WithFetchData } from "../../components/wrap/WithFetchData";
 import { useState } from "react";
 import { ListaTransiciones } from "../../components/ListaTransiciones";
+import { Historial } from "../../components/Historial";
 import { Share } from "../../components/share";
 
 function Tablero(props) {
@@ -29,7 +30,7 @@ function Tablero(props) {
         return(<ListasEstados
               Tareas={tablero_actual.tareas}
               Estados={tablero_actual.estados}
-              TableroId={tablero_actual.id}
+              Tablero={tablero_actual}
             />)
       case 'TRANSICIONES':
         return(
@@ -45,7 +46,9 @@ function Tablero(props) {
           )
       case 'HISTORIAL':
         return(
-          <p>HISTORIAL</p>
+          <Historial 
+            Historial={tablero_actual.transiciones}
+          />
         )
     }
   }
