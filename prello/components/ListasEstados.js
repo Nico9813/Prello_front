@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { crear_agregar_estado } from "../data/acciones";
 import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 import styles from "../styles/ListasEstados.module.css";
 import Estado from "./Estado";
 import EstadoModal from "./EstadoModal";
+import { TiDeleteOutline } from 'react-icons/ti';
+import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export const ListasEstados = (props) => {
   const { Tareas, Estados, Tablero } = props;
   const { id } = Tablero
   const fetchPrelloApi = useFetchPrelloApi()
-  const dispatch = useDispatch()
+  const dispatch = useRealTimeDispatch()
   const [filtrosActivos, setFiltrosActivos] = useState([])
 
   const [ isOpen, setIsOpen ] = useState(false)
@@ -21,9 +22,9 @@ export const ListasEstados = (props) => {
     dispatch(crear_agregar_estado(id, estado))
   }
 
-  const aplicarFiltro = ([key, expectedValue], tarea) => tarea[key] == expectedValue
+  const aplicarFiltro = ([key, expectedValue], tarea) => tarea[key].includes(expectedValue)
 
-  const renderFiltro = ([key, expectedValue]) => <div className={styles.filtroActivo}>{key}={expectedValue}</div>
+  const renderFiltro = ([key, expectedValue]) => <div className={styles.filtroActivo}><div className={styles.filtroContainer}><p className={styles.filtroText}>{key}={expectedValue}</p><TiDeleteOutline/></div></div>
 
   const parseFiltro = (filtro) => {
     return filtro.split('=')
@@ -31,7 +32,6 @@ export const ListasEstados = (props) => {
 
   const agregarFiltro = (evt) => {
     const filtro = parseFiltro(evt.target.value)
-    console.log(filtro)
     if (filtro.length  > 1){
       setFiltrosActivos(prevState => [...prevState, filtro])
     }

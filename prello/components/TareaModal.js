@@ -1,6 +1,9 @@
 import styles from "../styles/TareaModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
+import { crear_actualizar_tarea } from "../data/acciones";
+import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
+import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 
 export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [], onClose, onDelete}) {
   const [tarea, setTarea] = useState(tareaInicial)
@@ -10,12 +13,24 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
   const estadosPosibles = tarea.estados_posibles ?? []
   const roles = tarea.roles ?? []
 
+  const dispatch = useRealTimeDispatch()
+  const fetchPrelloApi = useFetchPrelloApi()
+
+  const actualizar_roles = (roles_modificados) => {
+    const tarea_final = {...tarea, roles:roles_modificados}
+    dispatch(crear_actualizar_tarea(tarea.tablero_id, tarea.id, tarea_final))
+    setTarea(tarea_final)
+    fetchPrelloApi(`tableros/${tarea.tablero_id}/tareas/${tarea.id}`, 'POST', { roles:roles_modificados})
+  }
+
   const quitar_rol = (rol) => {
-    console.log('quitar' + rol.id)
+    const roles_modificados = [...roles].filter(rol_actual => rol_actual.id != rol.id)
+    actualizar_roles(roles_modificados)
   }
 
   const agregar_rol = (rol) => {
-    console.log('agregar' + rol.id)
+    const roles_modificados = [...roles, rol]
+    actualizar_roles(roles_modificados)
   }
 
 
