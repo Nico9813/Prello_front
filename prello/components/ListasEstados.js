@@ -23,6 +23,8 @@ export const ListasEstados = (props) => {
 
   const aplicarFiltro = ([key, expectedValue], tarea) => tarea[key] == expectedValue
 
+  const renderFiltro = ([key, expectedValue]) => <div className={styles.filtroActivo}>{key}={expectedValue}</div>
+
   const parseFiltro = (filtro) => {
     return filtro.split('=')
   }
@@ -33,6 +35,7 @@ export const ListasEstados = (props) => {
     if (filtro.length  > 1){
       setFiltrosActivos(prevState => [...prevState, filtro])
     }
+    evt.target.value=''
   }
 
   return (
@@ -43,8 +46,10 @@ export const ListasEstados = (props) => {
         {isOpen && <EstadoModal isOpen={isOpen} onClose={agregarEstado}/>}
       </div>
       <input placeholder="Agregar filtro" className={styles.searchBar} onKeyDown={(evt) => {if(evt.key === 'Enter') agregarFiltro(evt)}}/>
-      <div>
-        {filtrosActivos.map( (value, index) => <p onClick={() => setFiltrosActivos(prevState => prevState.filter((_, indexActual) => indexActual != index))}>{JSON.stringify(value)}</p>)}
+      <div className={styles.filtros}>
+        {filtrosActivos.map((value, index) => <p onClick={() => setFiltrosActivos(prevState => prevState.filter((_, indexActual) => indexActual != index))}>
+          {renderFiltro(value)}
+        </p>)}
       </div>
       <div className={styles.container}>
         {Estados.map((estado, index) => (
