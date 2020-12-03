@@ -1,4 +1,4 @@
-import styles from "../../styles/layout.module.css";
+import styles from "../../styles/Layout.module.css";
 import { NavBar } from "../Navbar";
 import * as Colors from "../../constants/colors";
 
