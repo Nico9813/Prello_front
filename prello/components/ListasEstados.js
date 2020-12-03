@@ -38,6 +38,10 @@ export const ListasEstados = (props) => {
     evt.target.value=''
   }
 
+  const pruebaApi = async() => {
+    fetchPrelloApi('','GET')
+  }
+
   return (
     <>
       <div className={styles.titulo}>
@@ -50,6 +54,7 @@ export const ListasEstados = (props) => {
         {filtrosActivos.map((value, index) => <p onClick={() => setFiltrosActivos(prevState => prevState.filter((_, indexActual) => indexActual != index))}>
           {renderFiltro(value)}
         </p>)}
+        <button onClick={pruebaApi}>Prueba tiempo respuesta</button>
       </div>
       <div className={styles.container}>
         {Estados.map((estado, index) => (

@@ -22,6 +22,7 @@ const MyApp = ({ Component, pageProps }) => {
           audience="https://api-prello/v1"
         >
           <Layout initialProps={{ ...pageProps }}>
+            <p>{process.env.NODE_ENV}</p>
             <Wrap Component={Component}></Wrap>
           </Layout>
         </Auth0Provider>

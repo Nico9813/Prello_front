@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "../../styles/Tablero.module.css";
-import { Workflow } from "../../components/workflow";
+import { Workflow } from "../../components/Workflow";
 import { Loading } from "../../components/Loading";
 import { ListasEstados } from "../../components/ListasEstados";
 import { Layout } from "../../components/layout/Layout";
