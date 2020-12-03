@@ -17,7 +17,7 @@ export function useFetchPrelloApi(){
         prevAccessToken = accessToken
         
         const prelloBody = method != 'GET' ? { body: JSON.stringify(body)} : {}
-        const prelloPath = `http://127.0.0.1:58345/${path}`
+        const prelloPath = `${process.env.API}/${path}`
 
         try{
             const options = {
