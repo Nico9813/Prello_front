@@ -10,7 +10,7 @@ import { WithFetchData } from "../../components/wrap/WithFetchData";
 import { useState } from "react";
 import { ListaTransiciones } from "../../components/ListaTransiciones";
 import { Historial } from "../../components/Historial";
-import { Share } from "../../components/share";
+import { Share } from "../../components/Share";
 
 function Tablero(props) {
   const router = useRouter();
