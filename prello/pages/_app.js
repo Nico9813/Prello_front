@@ -21,6 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
           redirectUri={process.env.HOST + "/perfil"}
           audience="https://api-prello/v1"
         >
+          <p>{process.env.API}</p>
           <Layout initialProps={{ ...pageProps }}>
             <Wrap Component={Component}></Wrap>
           </Layout>
