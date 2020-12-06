@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 export async function useRealTimeSocket(dispatch, ids_tableros) {
-    const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    const client = new W3CWebSocket("wss://localhost:8000/");
 
     client.onopen = () => {
         ids_tableros.map( tablero_id => 

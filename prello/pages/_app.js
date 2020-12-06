@@ -18,10 +18,9 @@ const MyApp = ({ Component, pageProps }) => {
         <Auth0Provider
           domain="dev-jx8fysvq.us.auth0.com"
           clientId="d0b0YU95Fq69C0QMovzgxjfv2oY5aXmT"
-          redirectUri={process.env.HOST + "/perfil"}
+          redirectUri={process.env.HOST + "perfil"}
           audience="https://api-prello/v1"
         >
-          <p>{process.env.API}</p>
           <Layout initialProps={{ ...pageProps }}>
             <Wrap Component={Component}></Wrap>
           </Layout>

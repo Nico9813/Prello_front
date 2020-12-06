@@ -54,7 +54,6 @@ export const ListasEstados = (props) => {
         {filtrosActivos.map((value, index) => <p onClick={() => setFiltrosActivos(prevState => prevState.filter((_, indexActual) => indexActual != index))}>
           {renderFiltro(value)}
         </p>)}
-        <button onClick={pruebaApi}>Prueba tiempo respuesta</button>
       </div>
       <div className={styles.container}>
         {Estados.map((estado, index) => (
