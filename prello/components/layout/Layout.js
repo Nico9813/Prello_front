@@ -8,7 +8,9 @@ export const Layout = ({ children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.fixedTopBar}>
-        <button onClick={() => setShow(prevState => !prevState)} className={styles.buttonScrollBar}></button>
+        <button onClick={() => setShow(prevState => !prevState)} className={styles.buttonScrollBar}>
+          <img height="20px" src='/menu.svg'/>
+        </button>
         <p className={styles.texto}>Prello</p>
         <p className={styles.texto}>Log out</p>
       </div>

@@ -4,6 +4,10 @@
 }
 
 .buttonScrollBar {
+	background-color: rgba(0, 0, 0, 0);
+	border: grey;
+	height: 100%;
+	border-radius: 5px;
 }
 
 .innerContainer {
@@ -20,6 +24,9 @@
 	width: 100%;
 	height: 30px;
 	align-items: center;
+	-webkit-box-shadow: inset 0px -2px -4px -2px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: inset 0px -2px -4px -2px rgba(0, 0, 0, 0.75);
+	box-shadow: inset 0px -2px 5px -4px rgba(0, 0, 0, 0.75);
 }
 
 .leftContainer {
