@@ -1,9 +1,10 @@
 import styles from "../../styles/Layout.module.css";
 import { NavBar } from "../Navbar";
-import * as Colors from "../../constants/colors";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 
 export const Layout = ({ children }) => {
+  const { logout } = useAuth0();
   const [show, setShow] = useState(false)
   return (
     <div className={styles.container}>
@@ -12,7 +13,9 @@ export const Layout = ({ children }) => {
           <img height="20px" src='/menu.svg'/>
         </button>
         <p className={styles.texto}>Prello</p>
-        <p className={styles.texto}>Log out</p>
+        <button className={styles.logOutButton} onClick={() => logout({ returnTo: window.location.origin })}>
+          Log Out
+        </button>
       </div>
       <div className={styles.innerContainer}>
         <div className={styles.leftContainer} style={{display: show ? "flex" : "none"}}>

@@ -8,6 +8,17 @@
 	border: grey;
 	height: 100%;
 	border-radius: 5px;
+	cursor: pointer;
+}
+
+.logOutButton {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0);
+	color: white;
+	border-radius: 5px;
+	border: 1px solid rgba(0, 132, 255, 0.781);
+	padding: 5px;
+	margin: 5px;
 }
 
 .innerContainer {
