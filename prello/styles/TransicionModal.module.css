@@ -1,0 +1,17 @@
+.contenido {
+	background-color: rgba(0, 132, 255, 0.781);
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.titulo {
+	padding: 7px;
+	padding-left: 0px;
+}
+
+.tituloContainer {
+	display: flex;
+	padding: 7px;
+	justify-content: space-between;
+}

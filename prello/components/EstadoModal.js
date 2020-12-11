@@ -8,11 +8,11 @@ export default function EstadoModal({isOpen, onClose}) {
   return (
       <Modal isOpen={isOpen} onClose={() => onClose(nombre)}>
         <div className={styles.container}>
-        <p>Nuevo estado</p>
-            <div className={styles.innerContainer}>
-                <label> Nombre</label>
-                <input className={styles.titulo} onChange={evt => setNombre(evt.target.value)}/>
-            </div>
+          <p>Nuevo estado</p>
+          <div className={styles.innerContainer}>
+            <label> Nombre</label>
+            <input className={styles.titulo} onChange={evt => setNombre(evt.target.value)}/>
+          </div>
         </div>
       </Modal>
   );

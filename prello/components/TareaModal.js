@@ -35,7 +35,7 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
 
 
   return (
-      <Modal isOpen={isOpen} onClose={() => onClose(tarea)}>
+      <Modal isOpen={isOpen} onClose={() => onClose(tarea)} height="70%" width="70%">
         <div className={styles.modalInnerContainer}>
           <div className={styles.leftContainer}>
             <input className={styles.titulo} value={titulo} onChange={ event => setTarea({...tarea, titulo: event.target.value})}/>

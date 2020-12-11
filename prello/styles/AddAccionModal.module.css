@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.inputContainer {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.textArea {
+	width: 90%;
+	margin-top: 0px;
+	margin: auto;
+	border-radius: 8px;
+	min-height: 40%;
+}
+
+.tabContainer {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	margin-bottom: 0px;
+}
+
+.tab {
+	color: white;
+	border-radius: 8px;
+	background-color: #666666;
+	cursor: pointer;
+	border: 0.001px solid black;
+	padding: 5px;
+}
+
+.selected {
+	color: white;
+	cursor: pointer;
+	border-radius: 8px;
+	background-color: rgba(0, 132, 255, 0.781);
+	padding: 5px;
+	border: 0.001px solid black;
+}

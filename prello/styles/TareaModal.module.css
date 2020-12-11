@@ -11,7 +11,6 @@
 	margin: 5px;
 	padding: 5px;
 	background-color: black;
-	border: 1px solid grey;
 	border-radius: 4px;
 	height: 100%;
 	width: 80%;
@@ -23,7 +22,6 @@
 	justify-content: space-between;
 	margin: 5px;
 	padding: 5px;
-	border: 1px solid grey;
 	border-radius: 4px;
 	background-color: black;
 	height: 100%;

@@ -71,7 +71,7 @@ function Tablero(props) {
               </div>
               <div>        
                 {TABS.map( (tab, index) => 
-                  <b key={index} onClick={(() => setIndiceActual(TABS.indexOf(tab)))} style={{color: TABS[indiceActual] != tab ? 'grey' : 'white'}}>
+                  <b key={index} onClick={(() => setIndiceActual(index))} style={{color: TABS[indiceActual] != tab ? 'grey' : 'white'}}>
                     {tab}{index != (TABS.length - 1)  && ' | '}
                   </b>
                 )}

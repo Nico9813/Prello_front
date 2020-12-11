@@ -40,7 +40,7 @@ export default function Estado(props) {
       <div className={styles.innerContainer}>
               <div className={styles.titulo}>
           <p>{Estado.nombre}</p>
-          <p onClick={()=>setIsOpen(true)}>Add</p>
+          <p className={styles.addButton} onClick={()=>setIsOpen(true)}>Add</p>
           {<TareaModal isOpen={modalNuevaTareaOpen} onClose={agregarTarea}/>}
         </div>
         {Tareas.map((tarea, index) => (
