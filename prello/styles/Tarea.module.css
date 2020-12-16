@@ -19,10 +19,10 @@
 
 .seccion {
 	display: flex;
+	flex-direction: column;
 	margin: auto;
 	overflow: clip;
-	padding-left: 10px;
-	padding-top: 2px;
+	padding: 2px;
 	word-wrap: break-word;
 }
 

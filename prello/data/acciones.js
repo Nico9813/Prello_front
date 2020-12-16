@@ -11,6 +11,8 @@ export const ELIMINAR_ESTADO = "ELIMINAR_ESTADO";
 export const AGREGAR_TRANSICION_POSIBLE = "AGREGAR_TRANSICION_POSIBLE";
 export const ELIMINAR_TRANSICION_POSIBLE = "ELIMINAR_TRANSICION_POSIBLE";
 export const AGREGAR_TRANSICION_REALIZADA = "AGREGAR_TRANSICION_REALIZADA";
+export const AGREGAR_ACCION = "AGREGAR_ACCION";
+export const ELIMINAR_ACCION = "ELIMINAR_ACCION";
 
 export const crear_set_fet_data = (estado) => {
   return {
@@ -141,3 +143,26 @@ export const crear_agregar_transicion_realizada = (tablero_id,  transicion_reali
     }
   }
 }
+
+export const crear_agregar_accion = (tablero_id, transicion_id, accion_nueva) => {
+  return {
+    type: AGREGAR_ACCION,
+    payload: {
+      tablero_id,
+      transicion_id,
+      accion_nueva
+    }
+  }
+}
+
+export const crear_eliminar_accion = (tablero_id, transicion_id, accion_id) => {
+  return {
+    type: ELIMINAR_ACCION,
+    payload: {
+      tablero_id,
+      transicion_id,
+      accion_id
+    }
+  }
+}
+

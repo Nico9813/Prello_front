@@ -8,6 +8,7 @@ import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
 
 export default function Tarea(props) {
   const { Tarea, Roles } = props;
+  const {BotonTablero} = props //Para redirect en vista perfil
   const dispatch = useRealTimeDispatch()
   const fetchPrelloApi = useFetchPrelloApi()
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +56,7 @@ export default function Tarea(props) {
         className={styles.container}
       >
         <div className={styles.seccion}>
+          {BotonTablero}
           <b>{Tarea.titulo}</b>
         </div>
         <hr></hr>

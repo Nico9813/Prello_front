@@ -3,21 +3,36 @@ import * as Acciones from "./acciones";
 
 const tarea_reducer = (tarea = { id: -1 }, accion) => {
 
-  if(tarea.id != accion.payload.tarea_id) return {...tarea}
-
-  switch (accion.type) {
-    case Acciones.ACTUALIZAR_TAREA: 
-      tarea = {...tarea, ...accion.payload.actualizaciones}
-      break;
-    case Acciones.CAMBIAR_ESTADO_TAREA:
-      tarea.estado = accion.payload.estado_nuevo
-      break;
+  if(tarea.id == accion.payload.tarea_id){
+    switch (accion.type) {
+      case Acciones.ACTUALIZAR_TAREA: 
+        tarea = {...tarea, ...accion.payload.actualizaciones}
+        break;
+      case Acciones.CAMBIAR_ESTADO_TAREA:
+        tarea.estado = accion.payload.estado_nuevo
+        break;
+    }
   }
 
   return {
     ...tarea,
   };
 };
+
+const transicion_reducer = (transicion = {id: -1, acciones:[]}, accion) => {
+  if(transicion.id == accion.payload.transicion_id){
+    switch(accion.type){
+      case Acciones.AGREGAR_ACCION:
+        transicion.acciones = [...transicion.acciones, accion.payload.accion_nueva]
+        break;
+      case Acciones.ELIMINAR_ACCION:
+        transicion.acciones = [...transicion.acciones.filter(accion_actual => accion_actual.id != accion.payload.accion_id)]
+        break;
+    }
+  }
+
+  return {...transicion}
+}
 
 const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
 
@@ -59,6 +74,7 @@ const tablero_reducer = (tablero = { id:-1, tareas: [] }, accion) => {
 
   return {
     ...tablero,
+    workflow: {...tablero.workflow, transiciones_posibles: [...tablero.workflow.transiciones_posibles.map(transicion => transicion_reducer(transicion, accion))]},
     tareas: [...tablero.tareas.map((tarea) => tarea_reducer(tarea, accion))]
   };
 };

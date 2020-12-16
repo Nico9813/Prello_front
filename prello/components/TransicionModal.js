@@ -3,16 +3,21 @@ import AddAccionModal from "./AddAccionModal";
 import Modal from './Modal'
 import { useState } from "react";
 
-export default function TransicionModal({isOpen, onClose, transicion}) {
+export default function TransicionModal({isOpen, onClose, transicion, agregarAccion, eliminarAccion}) {
 
   //Solo webhooks como acciones
 
-  const { estado_inicial, estado_final, acciones } = transicion
+  const { id, estado_inicial, estado_final, acciones } = transicion
 
   const [crearAccionOpen, setCrearAccionOpen] = useState(false)
 
+  const agregarNuevaAccion = (type, url, method, header, body) => {
+    setCrearAccionOpen(false)
+    agregarAccion(id, type, url, method, header, body)
+  }
+
   return (
-      <Modal isOpen={isOpen} onClose={onClose} height={[...acciones, ...acciones, ...acciones].length * 5 + 50 +"%"}>
+      <Modal isOpen={isOpen} onClose={onClose} height={acciones.length * 5 + 50 +"%"}>
         <div className={styles.container}>
           <div className={styles.tituloContainer}>
             <p>Transicion</p>
@@ -24,14 +29,16 @@ export default function TransicionModal({isOpen, onClose, transicion}) {
             <p>Acciones</p>
             <button onClick={() => setCrearAccionOpen(true)}>Add</button>
           </div>
-          { crearAccionOpen && <AddAccionModal isOpen={crearAccionOpen} onClose={() => setCrearAccionOpen(false)}></AddAccionModal>}
-          {[...acciones, ...acciones, ...acciones].map( (accion, index) => 
+          { crearAccionOpen && <AddAccionModal isOpen={crearAccionOpen} onClose={() => setCrearAccionOpen(false)} agregarAccion={agregarNuevaAccion}></AddAccionModal>}
+          {acciones.map( (accion, index) => 
             <div className={styles.contenido} key={"accion " + index}>
               <p>Tipo: {accion.type}</p>
-              <p>Url: {JSON.parse(accion.payload).url}</p>
-              <p>Method: {JSON.parse(accion.payload).method}</p>
-              <p>Header: {JSON.parse(accion.payload).header?? "vacio"}</p>
-              <p>Body: {JSON.parse(accion.payload).body?? "vacio"}</p>
+              <p>Tipo: {accion.id}</p>
+              <p>Url: {accion.payload.url ?? JSON.parse(accion.payload).url}</p>
+              <p>Method: {accion.payload.method ?? JSON.parse(accion.payload).method}</p>
+              <p>Header: {accion.payload.header ?? JSON.parse(accion.payload).header?? "vacio"}</p>
+              <p>Body: {accion.payload.body ?? JSON.parse(accion.payload).body?? "vacio"}</p>
+              <button onClick={() => eliminarAccion(id, accion.id)}>ASD</button>
             </div>)
           }
         </div>

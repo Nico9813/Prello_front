@@ -21,7 +21,7 @@ export const Layout = ({ children }) => {
         <div className={styles.leftContainer} style={{display: show ? "flex" : "none"}}>
           <NavBar></NavBar>
         </div>
-        <div className={styles.rightContainer} style={{width: show? '80%' : '90%'}}>{children}</div>
+        <div className={styles.rightContainer}>{children}</div>
       </div>
     </div>
     
