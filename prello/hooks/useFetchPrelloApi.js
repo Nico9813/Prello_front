@@ -1,4 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react"
+import Axios from "axios"
+import https from "https"
 
 var prevAccessToken
 
@@ -21,7 +23,8 @@ export function useFetchPrelloApi(){
 
         try{
             const options = {
-                method: method, 
+                url: prelloPath,
+                method, 
                 headers:{
                     'Content-Type': "application/json",
                     'Authorization': `Bearer ${accessToken}`
@@ -30,10 +33,13 @@ export function useFetchPrelloApi(){
             }
 
             const inicio = new Date().valueOf()
-            const data = await fetch(prelloPath, options)
+            const agente = https.Agent({
+                rejectUnauthorized: false
+            })
+            const data = await Axios(options, { httpsAgent: agente})
             const fin = new Date().valueOf()
             console.log(`fetch prello api: ${fin - inicio}ms`)
-            return await data.json()
+            return await data.data
         }catch(e){
             console.log(e.message)
         }
