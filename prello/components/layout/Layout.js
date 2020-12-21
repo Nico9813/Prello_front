@@ -2,6 +2,7 @@ import styles from "../../styles/Layout.module.css";
 import { NavBar } from "../Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
+import { usePrelloApi } from "../../hooks/usePrelloApi";
 
 export const Layout = ({ children }) => {
   const { logout } = useAuth0();
@@ -24,6 +25,5 @@ export const Layout = ({ children }) => {
         <div className={styles.rightContainer}>{children}</div>
       </div>
     </div>
-    
   );
 };

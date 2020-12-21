@@ -1,7 +1,6 @@
 import styles from "../styles/AddTransicionModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
-import AddAccionModal from "./AddAccionModal";
 
 export default function AddTransicionModal({isOpen, onClose, estados}) {
 
