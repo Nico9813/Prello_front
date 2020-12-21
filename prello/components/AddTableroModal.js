@@ -1,4 +1,3 @@
-import styles from "../styles/AddTableroModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
 
