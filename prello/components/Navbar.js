@@ -7,7 +7,7 @@ import AddTableroModal from "./AddTableroModal";
 
 export const NavBar = () => {
   const tableros = useSelector((state) => state.perfil.tableros);
-  const { crearTablero } = usePrelloApi()
+  const { agregarTablero } = usePrelloApi()
   const [ showAddTableroModal, setShowAddTableroModal] = useState()
 
   return (
@@ -23,7 +23,7 @@ export const NavBar = () => {
         <li className={styles.titulo}>
           <h3>Tableros</h3>
           <button onClick={() => setShowAddTableroModal(true)}>Add</button>
-          {showAddTableroModal && <AddTableroModal isOpen={showAddTableroModal} onClose={() => setShowAddTableroModal(false)} onSubmit={crearTablero}></AddTableroModal>}
+          {showAddTableroModal && <AddTableroModal isOpen={showAddTableroModal} onClose={() => setShowAddTableroModal(false)} onSubmit={agregarTablero}></AddTableroModal>}
         </li>
         <li className={styles.item_lista}>
           <div className={styles.sublista}>

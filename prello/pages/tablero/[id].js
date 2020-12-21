@@ -12,7 +12,7 @@ import { ListaTransiciones } from "../../components/ListaTransiciones";
 import { Historial } from "../../components/Historial";
 import { Share } from "../../components/Share";
 
-function Tablero(props) {
+function Tablero() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -67,7 +67,7 @@ function Tablero(props) {
             <div className={styles.titulo}> 
               <div>
                 <a className={styles.nombre}>{tablero_actual.nombre}</a>
-                <Share TableroId={tablero_actual.id}/>
+                <Share TableroId={id}/>
               </div>
               <div>        
                 {TABS.map( (tab, index) => 

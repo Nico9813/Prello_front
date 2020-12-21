@@ -38,7 +38,7 @@ export default function TransicionModal({isOpen, onClose, transicion, agregarAcc
               <p>Method: {accion.payload.method ?? JSON.parse(accion.payload).method}</p>
               <p>Header: {accion.payload.header ?? JSON.parse(accion.payload).header?? "vacio"}</p>
               <p>Body: {accion.payload.body ?? JSON.parse(accion.payload).body?? "vacio"}</p>
-              <button onClick={() => eliminarAccion(id, accion.id)}>ASD</button>
+              <button onClick={() => eliminarAccion(id, accion.id)}>Eliminar</button>
             </div>)
           }
         </div>

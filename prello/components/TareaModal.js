@@ -1,26 +1,21 @@
 import styles from "../styles/TareaModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
-import { crear_actualizar_tarea } from "../data/acciones";
-import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
-import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
 
-export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [], onClose, onDelete}) {
+export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [], onClose=() => {}, onSubmit=() => {}, onDelete=() =>{}}) {
   const [tarea, setTarea] = useState(tareaInicial)
 
+  const tablero_id = tarea.tablero_id ?? -1
+  const id = tarea.id ?? -1
   const titulo = tarea.titulo ?? ''
   const descripcion = tarea.descripcion ?? ''
   const estadosPosibles = tarea.estados_posibles ?? []
   const roles = tarea.roles ?? []
 
-  const dispatch = useRealTimeDispatch()
-  const fetchPrelloApi = useFetchPrelloApi()
-
   const actualizar_roles = (roles_modificados) => {
     const tarea_final = {...tarea, roles:roles_modificados}
-    dispatch(crear_actualizar_tarea(tarea.tablero_id, tarea.id, tarea_final))
     setTarea(tarea_final)
-    fetchPrelloApi(`tableros/${tarea.tablero_id}/tareas/${tarea.id}`, 'POST', { roles:roles_modificados})
+    onSubmit(tarea_final)
   }
 
   const quitar_rol = (rol) => {
@@ -35,7 +30,7 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
 
 
   return (
-      <Modal isOpen={isOpen} onClose={() => onClose(tarea)} height="70%" width="70%">
+      <Modal isOpen={isOpen} onClose={() => {onSubmit(tarea); onClose()}} height="70%" width="70%">
         <div className={styles.modalInnerContainer}>
           <div className={styles.leftContainer}>
             <input className={styles.titulo} value={titulo} onChange={ event => setTarea({...tarea, titulo: event.target.value})}/>
@@ -44,7 +39,7 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
           <div className={styles.rightContainer}>
             <div>
               {tareaInicial && 
-                <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> onDelete()}>
+                <div className={styles.button} style={{backgroundColor: 'red'}} onClick={()=> {onDelete(tablero_id, id); onClose()}}>
                   <b>Eliminar tarea</b>
                 </div>
               }

@@ -2,15 +2,12 @@ import { useDrag, useDrop } from "react-dnd";
 import styles from "../styles/Tarea.module.css";
 import TareaModal from "./TareaModal";
 import { useState } from "react";
-import { crear_actualizar_tarea, crear_eliminar_tarea } from "../data/acciones";
-import { useFetchPrelloApi } from "../hooks/useFetchPrelloApi";
-import { useRealTimeDispatch } from "../hooks/useRealTimeSocket";
+import { usePrelloApi } from "../hooks/usePrelloApi";
 
 export default function Tarea(props) {
   const { Tarea, Roles } = props;
-  const {BotonTablero} = props //Para redirect en vista perfil
-  const dispatch = useRealTimeDispatch()
-  const fetchPrelloApi = useFetchPrelloApi()
+  const { BotonTablero } = props //Para redirect en vista perfil
+  const { updateTarea, deleteTarea} = usePrelloApi()
   const [isOpen, setIsOpen] = useState(false);
 
   const MAX_LONG = 50;
@@ -32,20 +29,6 @@ export default function Tarea(props) {
   })
 
   const toggleModal = () => setIsOpen((prevState) => !prevState);
-
-  const updateTarea = (tareaFinal) => {
-    const {id, tablero_id} = Tarea
-    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'POST', { titulo: tareaFinal.titulo, descripcion: tareaFinal.descripcion})
-    dispatch(crear_actualizar_tarea(Tarea.tablero_id, Tarea.id, tareaFinal))
-    toggleModal()
-  }
-
-  const deleteTarea = () => {
-    const {id, tablero_id} = Tarea
-    dispatch(crear_eliminar_tarea(tablero_id, id))
-    fetchPrelloApi(`tableros/${tablero_id}/tareas/${id}`, 'DELETE')
-    toggleModal()
-  }
 
   return (
     <>
@@ -69,7 +52,7 @@ export default function Tarea(props) {
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={Tarea} rolesPosibles={Roles} isOpen={isOpen} onClose={updateTarea} onDelete={deleteTarea}/>
+      <TareaModal tareaInicial={Tarea} rolesPosibles={Roles} isOpen={isOpen} onClose={toggleModal} onSubmit={updateTarea} onDelete={deleteTarea}/>
     </div>
     </>
   );

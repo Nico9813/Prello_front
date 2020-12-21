@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useFetchPrelloApi } from "../../hooks/useFetchPrelloApi";
+import { usePrelloApi } from "../../hooks/usePrelloApi";
 
 function Shared() {
-    const fetchPrelloApi = useFetchPrelloApi()
+    const { joinTablero } = usePrelloApi()
     const router = useRouter()
 
     useEffect(() => {
       const id = window.location.href.split('?id=').pop();
       (async () => {
-        const tablero = await fetchPrelloApi(`tableros/shared/${id}`, 'POST', {})
+        const tablero = joinTablero(id)
         router.push(`/tablero/${tablero.id}`)
       })()
     }, [])

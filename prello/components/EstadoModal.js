@@ -2,16 +2,17 @@ import styles from "../styles/EstadoModal.module.css";
 import Modal from './Modal'
 import { useState } from "react";
 
-export default function EstadoModal({isOpen, onClose}) {
+export default function EstadoModal({isOpen, onClose, onSubmit}) {
   const [nombre, setNombre] = useState()
 
   return (
-      <Modal isOpen={isOpen} onClose={() => onClose(nombre)}>
+      <Modal isOpen={isOpen} onClose={onClose} width="25%" height="10%">
         <div className={styles.container}>
           <p>Nuevo estado</p>
           <div className={styles.innerContainer}>
             <label> Nombre</label>
             <input className={styles.titulo} onChange={evt => setNombre(evt.target.value)}/>
+          <button onClick={() => {onSubmit(nombre); onClose()}}>Agregar</button>
           </div>
         </div>
       </Modal>
