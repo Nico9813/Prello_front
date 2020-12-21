@@ -11,7 +11,6 @@ export function usePrelloApi(){
     return {
         crearTablero: async function(nombre){
             const body = { nombre }
-            console.log(body)
             const nuevo_tablero = await fetchPrelloApi("tableros", "POST", body)
             dispatch(crear_agregar_tableros([nuevo_tablero]))
         }

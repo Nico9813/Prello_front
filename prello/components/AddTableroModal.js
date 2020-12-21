@@ -7,7 +7,7 @@ export default function AddTableroModal({isOpen, onClose, onSubmit}) {
 
   	return (
       <Modal isOpen={isOpen} onClose={onClose} height="7%" width="17%">
-        <div className={styles.container}>
+        <div>
             <input onChange={evt => setNombre(evt.target.value)}></input>
             <button onClick={() => onSubmit(nombre)}>Crear Tablero</button>
         </div>
