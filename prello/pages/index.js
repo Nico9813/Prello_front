@@ -3,6 +3,8 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+
 export default function Home() {
   const { loginWithRedirect } = useAuth0();
 
