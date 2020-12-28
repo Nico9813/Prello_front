@@ -13,7 +13,7 @@ Se ofrece la posibilidad de asignar acciones que se ejecuten automaticamente al 
  
  - **[API](https://github.com/Nico9813/Prello_API)**: Servidor web flask que es el unico encargado de actualizar y consultar la base de datos. Expone una api de formato REST para poder ser consultada externamente.
  
- - **[RealTimeSv](https://github.com/Nico9813/Prello_front/tree/master/realtimesv)**: Realizado en NodeJS es un servidor simple con el unico objetivo de mantener los distintos clientes actualizados ante una modificacion en un tablero compartido. Permite la subscripcion a un determinado proyecto la cual se realiza al ingresar al sistema y la des-suscripcion que se realiza al salir del mismo.
+ - **[RealTimeSv](https://github.com/Nico9813/Prello_front/tree/master/realtimesv)**: Realizado en NodeJS es un servidor que utiliza webSockets para mantener los distintos clientes actualizados ante una modificacion en un tablero compartido. Permite la subscripcion a un determinado proyecto la cual se realiza al ingresar al sistema y la des-suscripcion que se realiza al salir del mismo.
  
  - **MySqlDatabase**: Base de datos relacional en la que se guardan todos los datos referentes a los usuarios del sistema.
  
