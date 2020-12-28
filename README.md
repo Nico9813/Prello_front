@@ -1,6 +1,6 @@
 # Prello
 
-Prello es una aplicacion web de gestion de proyectos la cual puede ser utilizada para monitorear tareas y el flujo de las mismas a traves de las distintas etapas que atraviesen y provee tambien la asignacion de tareas a un usuario especifico, permitiendo el seguimiento de la situacion actual de todos los usuarios del proyecto.
+[Prello](https://prello-front.vercel.app/) es una aplicacion web de gestion de proyectos la cual puede ser utilizada para monitorear tareas y el flujo de las mismas a traves de las distintas etapas que atraviesen y provee tambien la asignacion de tareas a un usuario especifico, permitiendo el seguimiento de la situacion actual de todos los usuarios del proyecto.
 
 ### Transiciones
 
