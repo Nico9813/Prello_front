@@ -6,7 +6,7 @@ export default function EstadoModal({isOpen, onClose, onSubmit}) {
   const [nombre, setNombre] = useState()
 
   return (
-      <Modal isOpen={isOpen} onClose={onClose} width="25%" height="10%">
+      <Modal isOpen={isOpen} onClose={onClose} width="75%" height="11%">
         <div className={styles.container}>
           <p>Nuevo estado</p>
           <div className={styles.innerContainer}>
