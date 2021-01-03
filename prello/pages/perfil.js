@@ -23,7 +23,7 @@ function Perfil() {
         <div className={styles.leftContainer}>
           <div className={styles.topContainer}>
             {perfil.tableros.map((tablero, indexTablero) => tablero.tareas.map((tarea, index) => (
-              <Tarea BotonTablero={<a className={styles.botonTablero} style={{backgroundColor:colores_rol[indexTablero % colores_rol.length]}}>{tablero.nombre}</a>} key={index} Tarea={tarea} Roles={tablero.roles}/>
+                <Tarea BotonTablero={<a className={styles.botonTablero} style={{backgroundColor:colores_rol[indexTablero % colores_rol.length]}}>{tablero.nombre}</a>} key={index} Tarea={tarea} Roles={tablero.roles}/>
             )))}
           </div>
           <div className={styles.botContainer}>
@@ -36,7 +36,7 @@ function Perfil() {
           <p>Nombre: {user.given_name}</p>
           <p>Usuario: {user.nickname}</p>
           <p>Roles</p>
-          {[...perfil.tableros, ...perfil.tableros, ...perfil.tableros].map((tablero, index) => tablero.roles.map( rol => <p className={styles.rol} style={{backgroundColor:colores_rol[index % colores_rol.length]}}>{rol.nombre}</p>))}
+          {[...perfil.tableros].map((tablero, index) => tablero.roles.map( rol => <p className={styles.rol} style={{backgroundColor:colores_rol[index % colores_rol.length]}}>{rol.nombre}</p>))}
         </div>
         }
       </div>
