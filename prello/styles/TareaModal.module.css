@@ -21,6 +21,15 @@
 	width: 80%;
 }
 
+.estadosPosibles{
+	overflow-y: auto;
+	max-height: 63%;
+}
+
+.estados{
+	max-height: 60%;
+}
+
 .rightContainer {
 	display: flex;
 	flex-direction: column;

@@ -2,14 +2,14 @@ import styles from "../styles/TareaModal.module.css";
 import { useState } from "react";
 import Modal from './Modal'
 
-export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [], onClose=() => {}, onSubmit=() => {}, onDelete=() =>{}}) {
+export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [], estadosPosibles=[], onClose=() => {}, onSubmit=() => {}, onDelete=() =>{}}) {
   const [tarea, setTarea] = useState(tareaInicial)
 
   const tablero_id = tarea.tablero_id ?? -1
   const id = tarea.id ?? -1
+  const estado = tarea.estado ?? {}
   const titulo = tarea.titulo ?? ''
   const descripcion = tarea.descripcion ?? ''
-  const estadosPosibles = tarea.estados_posibles ?? []
   const roles = tarea.roles ?? []
 
   const actualizar_roles = (roles_modificados) => {
@@ -27,7 +27,6 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
     const roles_modificados = [...roles, rol]
     actualizar_roles(roles_modificados)
   }
-
 
   return (
       <Modal isOpen={isOpen} onClose={() => {onSubmit(tarea); onClose()}} maxHeight="500px" maxWidth="1024px" height="90%" width="90%">
@@ -63,11 +62,18 @@ export default function TareaModal({isOpen, tareaInicial = {}, rolesPosibles = [
               
             </div>
             {tareaInicial &&             
-              <div>
-                {estadosPosibles.map((estado, index) => 
-                  <div key={index} className={styles.button} onClick={()=> setTarea({...tarea, estado})}><b>{estado.nombre}</b></div>
-                )}
-            </div>}
+                <div className={styles.estados}>
+                  <p>Estado actual:</p>
+                  <div className={styles.button}>
+                    <b>{estado.nombre}</b>
+                  </div>
+                  <p>Mover a:</p>
+                  <div className={styles.estadosPosibles}>
+                    {estadosPosibles.filter(e => e.id != estado.id).map((estado, index) => 
+                      <div key={index} className={styles.button} onClick={() => setTarea({ ...tarea, estado })}><b>{estado.nombre}</b></div>
+                    )}
+                  </div>
+                </div>}
           </div>
         </div>
       </Modal>

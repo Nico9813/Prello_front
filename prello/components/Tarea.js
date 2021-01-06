@@ -5,7 +5,7 @@ import { useState } from "react";
 import { usePrelloApi } from "../hooks/usePrelloApi";
 
 export default function Tarea(props) {
-  const { Tarea, Roles } = props;
+  const { Tarea, Roles, Estados } = props;
   const { BotonTablero } = props //Para redirect en vista perfil
   const { updateTarea, deleteTarea} = usePrelloApi()
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function Tarea(props) {
           ))}
         </div>
       </div>
-      <TareaModal tareaInicial={Tarea} rolesPosibles={Roles} isOpen={isOpen} onClose={toggleModal} onSubmit={updateTarea} onDelete={deleteTarea}/>
+      <TareaModal estadosPosibles={Estados} tareaInicial={Tarea} rolesPosibles={Roles} isOpen={isOpen} onClose={toggleModal} onSubmit={updateTarea} onDelete={deleteTarea}/>
     </div>
     </>
   );

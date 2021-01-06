@@ -9,7 +9,7 @@ import { usePrelloApi } from "../hooks/usePrelloApi";
 
 export default function Estado(props) {
   const { Estado, Tareas, Tablero } = props;
-  const { id : TableroId, roles : Roles } = Tablero
+  const { id : TableroId, roles : Roles, estados: Estados } = Tablero
   const { agregarTarea, transicionTarea } = usePrelloApi()
   const [modalNuevaTareaOpen, setIsOpen] = useState(false)
   const dummy = useRef()
@@ -36,7 +36,7 @@ export default function Estado(props) {
           {<TareaModal isOpen={modalNuevaTareaOpen} onSubmit={onNuevaTarea} onClose={() => setIsOpen(false)}/>}
         </div>
         {Tareas.map((tarea, index) => (
-          <Tarea key={index} Tarea={tarea} Roles={Roles}/>
+          <Tarea key={index} Tarea={tarea} Roles={Roles} Estados={Estados}/>
         ))}
       </div>
       <div ref={dummy}/>
