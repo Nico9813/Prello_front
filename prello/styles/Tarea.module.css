@@ -22,7 +22,8 @@
 	flex-direction: column;
 	margin: auto;
 	overflow: clip;
-	padding: 2px;
+	padding: 9px;
+	padding-bottom: 2px;
 	word-wrap: break-word;
 }
 

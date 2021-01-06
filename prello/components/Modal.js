@@ -1,6 +1,6 @@
 import ReactModal from "react-modal";
 
-export default function Modal({isOpen, onClose = () => {}, children, width="50%", height="50%"}) {
+export default function Modal({isOpen, onClose = () => {}, children, width="50%", height="50%", maxHeight="100%", maxWidth="100%"}) {
   return (
       <ReactModal
         shouldCloseOnEsc={true}
@@ -30,6 +30,8 @@ export default function Modal({isOpen, onClose = () => {}, children, width="50%"
             overflow: "auto",
             width: width,
             height: height,
+            maxHeight: maxHeight,
+            maxWidth: maxWidth,
             margin: "auto",
             backgroundColor: "black",
             WebkitOverflowScrolling: "touch",
