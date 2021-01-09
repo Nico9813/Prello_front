@@ -22,7 +22,9 @@ export const NavBar = () => {
         </li>
         <li className={styles.titulo}>
           <h3>Tableros</h3>
-          <button onClick={() => setShowAddTableroModal(true)}>Add</button>
+          <div>
+            <button className={styles.boton} onClick={() => setShowAddTableroModal(true)}>Agregar</button>
+          </div>
           {showAddTableroModal && <AddTableroModal isOpen={showAddTableroModal} onClose={() => setShowAddTableroModal(false)} onSubmit={agregarTablero}></AddTableroModal>}
         </li>
         <li className={styles.item_lista}>

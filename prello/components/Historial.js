@@ -35,6 +35,7 @@ export const Historial = (props) => {
       {Historial.reverse().map( (transicion, index) => 
       <div key={index}>
       <div className={styles.transicion}> 
+            <p>{JSON.stringify(transicion.respuestas)}</p>
         <div className={styles.columna}>
             <div className={styles.contenido}>
               <div className={styles.estado}>

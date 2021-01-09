@@ -8,10 +8,21 @@
 	box-shadow: inset 0px -2px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.boton {
+	background-color: rgba(0, 132, 255, 0.781);
+	border-radius: 8px;
+	margin: 5px;
+	border: 0.1px solid white;
+	color: white;
+	padding: 5px;
+	cursor: pointer;
+}
+
 .titulo {
 	display: flex;
 	justify-content: space-between;
 	margin: 5px;
+	align-items: center;
 }
 
 .lista {
